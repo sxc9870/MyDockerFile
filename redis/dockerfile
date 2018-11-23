@@ -4,7 +4,7 @@ MAINTAINER  sxc 35631371@qq.com
 
 COPY redis.conf /usr/bin/
 
-##¸ü¸Ä¾µÏñ
+##Â¸Ã¼Â¸Ã„Â¾ÂµÃÃ±
 RUN cd /etc/apk \
 && sed 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.aliyun.com/g' -i /etc/apk/repositories \
 && apk update \
