@@ -1,1 +1,1 @@
-docker run -itd --name redis-3 sxc:v1   sh /usr/bin/redis.sh 
+docker run -itd --name redis-3 sxc:v1   
