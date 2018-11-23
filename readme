@@ -1,1 +1,2 @@
-sss
+Q.容器PING不通
+A.route add 容器IP mask 255.255.255.0 虚拟机IP
