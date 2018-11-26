@@ -8,13 +8,12 @@ COPY redis.conf /usr/bin/
 RUN cd /etc/apk \
 && sed 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.aliyun.com/g' -i /etc/apk/repositories \
 && apk update \
-&& apk  --no-cache add busybox libgcc musl redis openrc \
+&& apk  --no-cache add busybox libgcc musl redis  \
 && touch /usr/bin/redis.sh \
 && echo >> /usr/bin/redis.sh \#!/bin/bash \
 && echo >> /usr/bin/redis.sh /usr/bin/redis-server /usr/bin/redis.conf \
 && echo >> /usr/bin/redis.sh /bin/sh \
 && chmod -R 777 /usr/bin/redis.sh 
-#&& chmod -X /usr/bin/redis.sh \
-#&& rc-update add local
+
 
 CMD ["sh","/usr/bin/redis.sh"]
