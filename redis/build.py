@@ -4,11 +4,13 @@ import sys
 import os
 
 def buildeMode(argv):
-    bindId = argv[2]  # bindIp
+    bindId = argv[2].replace(","," ")  # bindIp
     password = argv[3]  # 节点认证密码
     mOrs = argv[4]  # 是否主从
     masterIp = argv[5]  # 主节点iP
     masterPort = argv[6]  # 主节点端口
+
+
     redisConf = ""
     sentinelConf = ""
 
@@ -27,6 +29,8 @@ def buildeMode(argv):
             sentinelConf = (sentinelConf % {'password': password, 'sName': "myMaster", 'sIp': masterIp,
                                             'sPort': masterPort})
         else:
+            sentinueIp=argv[7] #哨兵IP
+            sentinelPort=argv[8] #哨兵端口
             sentinelConf = (sentinelConf % {'password': password, 'sName': "mySlave", 'sIp': masterIp,
                                             'sPort': masterPort})
 
@@ -42,7 +46,7 @@ def buildeMode(argv):
     if mOrs =="m":
       cmd="cd target && docker build -t sxc:master ."
     else :
-      cmd="cd target && docker build -t sxc:slave%s%s  ." % (masterIp,":",masterPort)
+      cmd="cd target && docker build -t sxc:slave%s:%s  ." % (masterIp,masterPort)
     os.system(cmd)
 
 
