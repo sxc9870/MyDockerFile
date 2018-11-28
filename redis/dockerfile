@@ -3,7 +3,7 @@ FROM alpine
 MAINTAINER  sxc 35631371@qq.com
 
 COPY redis.conf /usr/bin/
-
+COPY sentinel.conf /usr/bin/
 ##¸ü¸Ä¾µÏñ
 RUN cd /etc/apk \
 && sed 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.aliyun.com/g' -i /etc/apk/repositories \
@@ -12,6 +12,7 @@ RUN cd /etc/apk \
 && touch /usr/bin/redis.sh \
 && echo >> /usr/bin/redis.sh \#!/bin/bash \
 && echo >> /usr/bin/redis.sh /usr/bin/redis-server /usr/bin/redis.conf \
+&& echo >> /usr/bin/redis.sh /usr/bin/redis-sentinel /usr/bin/redis.sentinel.conf \
 && echo >> /usr/bin/redis.sh /bin/sh \
 && chmod -R 777 /usr/bin/redis.sh \
 && mkdir -p /data/redis/
