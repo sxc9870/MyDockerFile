@@ -38,11 +38,11 @@ def buildeMode(argv):
             f2.write(f.read())
     cmd=""
     if mOrs =="m":
-      cmd="../target/docker build -t sxc:master ."
+      cmd="docker build -t sxc:master ."
     else :
-      cmd="../target/docker build -t sxc:slave ."
+      cmd="docker build -t sxc:slave ."
+    os.system("cd ../target/")
     os.system(cmd)
-
 
 if __name__ == "__main__":
     if (len(sys.argv)) < 1:
