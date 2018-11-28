@@ -34,14 +34,14 @@ def buildeMode(argv):
         f.write(sentinelConf)
 
     with open('src/dockerfile', 'r') as f:
-        with open('target/Dockerfile', 'w') as f2:
+        with open('target/dockerfile', 'w') as f2:
             f2.write(f.read())
     cmd=""  #build命令,启动命令
     if mOrs =="m":
-      cmd="docker build -t sxc:master ."
+      cmd="docker build -t sxc:%s ." % masterIp
     else :
       cmd="docker build -t sxc:slave ."
-    os.system("cd target/")
+    os.system("cd target")
     os.system(cmd)
 
 
