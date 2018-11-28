@@ -46,7 +46,7 @@ def buildeMode(argv):
     if mOrs =="m":
       cmd="cd target && docker build -t sxc:master ."
     else :
-      cmd="cd target && docker build -t sxc:slave%s:%s ." % (masterIp.split(".")[3],masterPort)
+      cmd="cd target && docker build -t sxc:slave%s-%s ." % (masterIp.split(".")[3],masterPort)
     os.system(cmd)
 
 
