@@ -18,7 +18,8 @@ def buildeMode(argv):
             redisConf = (redisConf % {'bIp': bindId, 'password': password, 'mk': "#", 'mIp': masterIp,
                                       'mPort': masterPort})
         else:
-            redisConf = (redisConf % (bindId, password, "", password, "", masterIp, masterPort))
+            redisConf = (redisConf % {'bIp': bindId, 'password': password, 'mk': "", 'mIp': masterIp,
+                                      'mPort': masterPort})
 
     with open('src/sentinel.conf', 'r') as f:
         sentinelConf = f.read()
@@ -26,7 +27,8 @@ def buildeMode(argv):
             sentinelConf = (sentinelConf % {'password': password, 'sName': "myMaster", 'sIp': masterIp,
                                             'sPort': masterPort})
         else:
-            sentinelConf = (sentinelConf % (bindId, password, "", password, "", masterIp, masterPort))
+            sentinelConf = (sentinelConf % {'password': password, 'sName': "mySlave", 'sIp': masterIp,
+                                            'sPort': masterPort})
 
     with open('target/redis.conf', 'w') as f:
         f.write(redisConf)

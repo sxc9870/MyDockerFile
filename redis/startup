@@ -1,2 +1,7 @@
 
 python build.py  b 0.0.0.0 123456 m 192.168.239.130 56379
+python build.py  r redis-master 56379:6379,46379:26379 sxc:master
+
+
+
+python build.py  b 0.0.0.0 123456 s 192.168.239.130 56379
