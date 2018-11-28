@@ -44,9 +44,9 @@ def buildeMode(argv):
             f2.write(f.read())
     cmd=""  #build命令,启动命令
     if mOrs =="m":
-      cmd="cd target && docker build -t sxc:master ."
+      cmd="cd target && docker build -t redis:master ."
     else :
-      cmd="cd target && docker build -t sxc:slave%s-%s ." % (masterIp.split(".")[3],masterPort)
+      cmd="cd target && docker build -t redis:slave%s-%s ." % (masterIp.split(".")[3],masterPort)
     os.system(cmd)
 
 
