@@ -12,7 +12,7 @@ def buildeMode(argv):
     redisConf = ""
     sentinelConf = ""
 
-    with open('redis.conf', 'r') as f:
+    with open('src/redis.conf', 'r') as f:
         redisConf = f.read()
         if mOrs == "m":  # MASTER节点镜像
             redisConf = (redisConf % {'bIp': bindId, 'password': password, 'mk': "#", 'mIp': masterIp,
@@ -20,7 +20,7 @@ def buildeMode(argv):
         else:
             redisConf = (redisConf % (bindId, password, "", password, "", masterIp, masterPort))
 
-    with open('sentinel.conf', 'r') as f:
+    with open('src/sentinel.conf', 'r') as f:
         sentinelConf = f.read()
         if mOrs == "m":  # MASTER节点镜像
             sentinelConf = (sentinelConf % {'password': password, 'sName': "myMaster", 'sIp': masterIp,
@@ -28,20 +28,30 @@ def buildeMode(argv):
         else:
             sentinelConf = (sentinelConf % (bindId, password, "", password, "", masterIp, masterPort))
 
-    with open('../target/redis.conf', 'w') as f:
+    with open('target/redis.conf', 'w') as f:
         f.write(redisConf)
-    with open('../target/sentinel.conf', 'w') as f:
+    with open('target/sentinel.conf', 'w') as f:
         f.write(sentinelConf)
 
-    with open('dockerfile', 'r') as f:
-        with open('../target/dockerfile', 'w') as f2:
+    with open('src/dockerfile', 'r') as f:
+        with open('target/dockerfile', 'w') as f2:
             f2.write(f.read())
-    cmd=""
+    cmd=""  #build命令,启动命令
     if mOrs =="m":
       cmd="docker build -t sxc:master ."
     else :
       cmd="docker build -t sxc:slave ."
-    os.system("cd ../target/")
+    os.system("cd target/")
+    os.system(cmd)
+
+
+
+def runModel(argv):
+    containName=argv[2] #容器名称
+    portExplose=argv[3] #暴露端口 多个用空格分割
+    imageName=argv[4] #镜像名称
+    cmd="docker run -itd --name %(name)s -p %(explose)s  %(imageName)s " % {"name":containName,"explose":portExplose,"imageName":imageName}
+    os.system("cd target/")
     os.system(cmd)
 
 if __name__ == "__main__":
@@ -51,3 +61,5 @@ if __name__ == "__main__":
     type = sys.argv[1]
     if type == "b":  # 构建模式 用于build镜像
         buildeMode(sys.argv)
+    else :
+        runModel(sys.argv)

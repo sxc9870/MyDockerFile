@@ -1,1 +1,2 @@
-docker run -itd --name redis-3 sxc:v1   
+
+python build.py  b 0.0.0.0 123456 m 192.168.239.130 56379
