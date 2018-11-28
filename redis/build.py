@@ -38,9 +38,9 @@ def buildeMode(argv):
             f2.write(f.read())
     cmd=""  #build命令,启动命令
     if mOrs =="m":
-      cmd="docker build -t sxc:%s ." % masterIp
+      cmd="docker build -t sxc:master ."
     else :
-      cmd="docker build -t sxc:slave ."
+      cmd="docker build -t sxc:slave%s%s  ." % (masterIp,":",masterPort)
     os.system("cd target")
     os.system(cmd)
 
