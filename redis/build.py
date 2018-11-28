@@ -38,11 +38,11 @@ def buildeMode(argv):
             f2.write(f.read())
     cmd=""  #build命令,启动命令
     if mOrs =="m":
-      cmd="docker build -t sxc:master ."
+      cmd="cd target && docker build -t sxc:master ."
     else :
-      cmd="docker build -t sxc:slave%s%s  ." % (masterIp,":",masterPort)
-    os.system("cd target")
+      cmd="cd target && docker build -t sxc:slave%s%s  ." % (masterIp,":",masterPort)
     os.system(cmd)
+
 
 
 
@@ -50,8 +50,7 @@ def runModel(argv):
     containName=argv[2] #容器名称
     portExplose=argv[3] #暴露端口 多个用空格分割
     imageName=argv[4] #镜像名称
-    cmd="docker run -itd --name %(name)s -p %(explose)s  %(imageName)s " % {"name":containName,"explose":portExplose,"imageName":imageName}
-    os.system("cd target/")
+    cmd="cd target && docker run -itd --name %(name)s -p %(explose)s  %(imageName)s " % {"name":containName,"explose":portExplose,"imageName":imageName}
     os.system(cmd)
 
 if __name__ == "__main__":
