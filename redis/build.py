@@ -43,7 +43,7 @@ def buildeMode(argv):
             f2.write(f.read())
     cmd = ""  # build命令,启动命令
     if mOrs == "m":
-        cmd = "cd target && docker build -t redis:master ."
+        cmd = "cd target && docker build -t redis:master  ."
     else:
         cmd = "cd target && docker build -t redis:slave%s-%s ." % ("", masterPort)
     os.system(cmd)
@@ -53,7 +53,7 @@ def runModel(argv):
     containName = argv[2]  # 容器名称
     portExplose = argv[3].replace(",", " -p ")  # 暴露端口 多个用,分割
     imageName = argv[4]  # 镜像名称
-    cmd = "cd target && docker run -itd --name %(name)s -p %(explose)s  %(imageName)s " % {"name": containName,
+    cmd = "cd target && docker run -itd --name %(name)s -h %(name)s  -p %(explose)s  %(imageName)s " % {"name": containName,
                                                                                            "explose": portExplose,
                                                                                            "imageName": imageName}
     os.system(cmd)
