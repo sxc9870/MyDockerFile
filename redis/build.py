@@ -8,15 +8,9 @@ def buildeMode(argv):
     bindId = argv[2].replace(",", " ") #绑定IP 逗号分隔
     password = argv[3]#.input("请输入主节点密码：")  # 节点认证密码
     mOrs =argv[4] #input("请输入当前节点角色 m 还是s：")  # 是否主从
-    masterIp=""
-    masterPort=""
-    # sentinueIp = input("请输入哨兵IP端口：")  # 哨兵IP
-    # sentinelPort = sentinueIp.split(":")[1]  # 哨兵端口
-    # sentinueIp = sentinueIp.split(":")[0]
-    if mOrs == "s":
-        masterIp =argv[5]  #input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口
-        masterPort = masterIp.split(":")[1]  # 主节点端口
-        masterIp = masterIp.split(":")[0]
+    masterIp =argv[5]  #input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口 与哨兵同一个IP
+    masterPort = masterIp.split(":")[1]  # 主节点端口
+    masterIp = masterIp.split(":")[0]
 
     redisConf = ""
     sentinelConf = ""
