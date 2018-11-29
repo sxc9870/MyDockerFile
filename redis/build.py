@@ -4,12 +4,18 @@ import sys
 import os
 
 def buildeMode(argv):
-    bindId = argv[2].replace(","," ")  # bindIp
-    password = argv[3]  # 节点认证密码
-    mOrs = argv[4]  # 是否主从
-    masterIp = argv[5]  # 主节点iP
-    masterPort = argv[6]  # 主节点端口
+    bindId = input("请输入bindip,逗号分隔：")
+    bindId =bindId.replace(","," ")  # bindIp
+    password = input("请输入主节点密码：")   # 节点认证密码
+    mOrs =  input("当前节点角色 m 还是s：")  # 是否主从
 
+    sentinueIp = input("请输入哨兵IP端口：")  # 哨兵IP
+    sentinelPort = sentinueIp.split(":")[1]  # 哨兵端口
+    sentinueIp = sentinueIp.split(":")[0]
+    if mOrs=="s":
+        masterIp = input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口
+        masterPort = masterIp.split(":")[1]  # 主节点端口
+        masterIp = masterIp.split(":")[0]
 
     redisConf = ""
     sentinelConf = ""
@@ -26,13 +32,11 @@ def buildeMode(argv):
     with open('src/sentinel.conf', 'r') as f:
         sentinelConf = f.read()
         if mOrs == "m":  # MASTER节点镜像
-            sentinelConf = (sentinelConf % {'password': password, 'sName': "myMaster", 'sIp': masterIp,
-                                            'sPort': masterPort})
+            sentinelConf = (sentinelConf % {'password': password, 'sName': "myMaster", 'sIp': sentinueIp,
+                                            'sPort': sentinelPort})
         else:
-            sentinueIp=argv[7] #哨兵IP
-            sentinelPort=argv[8] #哨兵端口
-            sentinelConf = (sentinelConf % {'password': password, 'sName': "mySlave", 'sIp': masterIp,
-                                            'sPort': masterPort})
+            sentinelConf = (sentinelConf % {'password': password, 'sName': "mySlave", 'sIp': sentinueIp,
+                                            'sPort': sentinelPort})
 
     with open('target/redis.conf', 'w') as f:
         f.write(redisConf)
@@ -60,10 +64,7 @@ def runModel(argv):
     os.system(cmd)
 
 if __name__ == "__main__":
-    if (len(sys.argv)) < 1:
-        print("参数不足:b模式,bindId,password,主从,主机IP和端口")
-        sys.exit()
-    type = sys.argv[1]
+    type = input("请输入构建类型 b模式或者r模式：")
     if type == "b":  # 构建模式 用于build镜像
         buildeMode(sys.argv)
     elif type=="r":
