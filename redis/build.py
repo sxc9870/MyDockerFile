@@ -67,7 +67,7 @@ def runModel(argv):
 
 if __name__ == "__main__":
     type = input("请输入构建类型 b模式或者r模式：")
-    if type == "b":  # 构建模式 用于build镜像
+    if type == 'b':  # 构建模式 用于build镜像
         buildeMode(sys.argv)
-    elif type == "r":
+    elif type == 'r':
         runModel(sys.argv)
