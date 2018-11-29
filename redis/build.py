@@ -57,9 +57,10 @@ def buildeMode():
 
 
 def runModel(argv):
-    containName = argv[2]  # 容器名称
-    portExplose = argv[3].replace(",", " -p ")  # 暴露端口 多个用,分割
-    imageName = argv[4]  # 镜像名称
+    containName = input("请输入容器名称：")   # 容器名称
+    portExplose=input("请输入暴露端口多个逗号分隔：")
+    portExplose = portExplose.replace(",", " -p ")  # 暴露端口 多个用,分割
+    imageName = input("请输入要使用的镜像：")  # 镜像名称
     cmd = "cd target && docker run -itd --name %(name)s -p %(explose)s  %(imageName)s " % {"name": containName,
                                                                                            "explose": portExplose,
                                                                                            "imageName": imageName}
