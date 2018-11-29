@@ -1,11 +1,17 @@
 
-python build.py b 127.0.0.1,0.0.0.0 123456 m 192.168.239.130:56379
-python build.py  r redis-master 56379:6379,46379:26379 redis:master
+
+docker network create --subnet=172.172.0.0/24 sxc-redis
 
 
 
-python build.py b 127.0.0.1,0.0.0.0 123456 s 192.168.239.130:56379
-python build.py  r redis-slave1  56380:6379,46380:26379 redis:slave130-56379
+
+python build.py b 127.0.0.1,0.0.0.0 123456 m 172.172.0.1:6379
+python build.py  r redis-master 56379:6379,46379:26379 redis:master sxc-redis 172.172.0.1
+
+
+
+python build.py b 127.0.0.1,0.0.0.0 123456 s 192.168.239.130:6379
+python build.py  r redis-slave1  56380:6379,46380:26379 redis:slave-56379
 python build.py  r redis-slave2  56381:6379,46381:26379 redis:slave130-56379
 
 python build.py  r redis-slave3  56382:6379,46382:26379 redis:slave130-56379

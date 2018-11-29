@@ -53,8 +53,11 @@ def runModel(argv):
     containName = argv[2]  # 容器名称
     portExplose = argv[3].replace(",", " -p ")  # 暴露端口 多个用,分割
     imageName = argv[4]  # 镜像名称
-    cmd = "cd target && docker run -itd --net=host --name %(name)s -h %(name)s  -p %(explose)s  %(imageName)s " % {"name": containName,
-                                                                                           "explose": portExplose,
+
+    networkName = argv[5]  # docker net节点名称
+    ip = argv[6]  # 指定容器IP
+    cmd = "cd target && docker run -itd  --name %(name)s --network %(networkName)s --ip %(ip)s  -p %(explose)s  %(imageName)s " % {"name": containName,
+                                                                                           "explose": portExplose,"ip":ip,"networkName":networkName,
                                                                                            "imageName": imageName}
     os.system(cmd)
 
