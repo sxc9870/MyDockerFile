@@ -4,12 +4,13 @@ import sys
 import os
 
 
-def buildeMode(argv):
+def buildeMode():
     bindId = input("请输入bindip,逗号分隔：")
     bindId = bindId.replace(",", " ")  # bindIp
     password = input("请输入主节点密码：")  # 节点认证密码
     mOrs = input("请输入当前节点角色 m 还是s：")  # 是否主从
-
+    masterIp=""
+    masterPort=""
     # sentinueIp = input("请输入哨兵IP端口：")  # 哨兵IP
     # sentinelPort = sentinueIp.split(":")[1]  # 哨兵端口
     # sentinueIp = sentinueIp.split(":")[0]
@@ -67,7 +68,7 @@ def runModel(argv):
 
 if __name__ == "__main__":
     type = input("请输入构建类型 b模式或者r模式：")
-    if type == 'b':  # 构建模式 用于build镜像
-        buildeMode(sys.argv)
-    elif type == 'r':
+    if type == "b":  # 构建模式 用于build镜像
+        buildeMode()
+    elif type == "r":
         runModel(sys.argv)
