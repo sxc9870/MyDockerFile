@@ -4,18 +4,17 @@ import sys
 import os
 
 
-def buildeMode():
-    bindId = input("请输入bindip,逗号分隔：")
-    bindId = bindId.replace(",", " ")  # bindIp
-    password = input("请输入主节点密码：")  # 节点认证密码
-    mOrs = input("请输入当前节点角色 m 还是s：")  # 是否主从
+def buildeMode(argv):
+    bindId = argv[2].replace(",", " ") #绑定IP 逗号分隔
+    password = argv[3]#.input("请输入主节点密码：")  # 节点认证密码
+    mOrs =argv[4] #input("请输入当前节点角色 m 还是s：")  # 是否主从
     masterIp=""
     masterPort=""
     # sentinueIp = input("请输入哨兵IP端口：")  # 哨兵IP
     # sentinelPort = sentinueIp.split(":")[1]  # 哨兵端口
     # sentinueIp = sentinueIp.split(":")[0]
     if mOrs == "s":
-        masterIp = input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口
+        masterIp =argv[5]  #input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口
         masterPort = masterIp.split(":")[1]  # 主节点端口
         masterIp = masterIp.split(":")[0]
 
@@ -57,10 +56,9 @@ def buildeMode():
 
 
 def runModel(argv):
-    containName = input("请输入容器名称：")   # 容器名称
-    portExplose=input("请输入暴露端口多个逗号分隔：")
-    portExplose = portExplose.replace(",", " -p ")  # 暴露端口 多个用,分割
-    imageName = input("请输入要使用的镜像：")  # 镜像名称
+    containName = argv[2]  # 容器名称
+    portExplose = argv[3].replace(",", " -p ")  # 暴露端口 多个用,分割
+    imageName = argv[4]  # 镜像名称
     cmd = "cd target && docker run -itd --name %(name)s -p %(explose)s  %(imageName)s " % {"name": containName,
                                                                                            "explose": portExplose,
                                                                                            "imageName": imageName}
@@ -68,8 +66,8 @@ def runModel(argv):
 
 
 if __name__ == "__main__":
-    type = input("请输入构建类型 b模式或者r模式：")
+    type = sys.argv[1]
     if type == "b":  # 构建模式 用于build镜像
-        buildeMode()
+        buildeMode(sys.argv)
     elif type == "r":
         runModel(sys.argv)
