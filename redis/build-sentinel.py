@@ -15,7 +15,7 @@ def buildeMode(argv):
     sentinelConf = ""
     with open('src/sentinel.conf', 'r') as f:
             sentinelConf = f.read()
-            sentinelConf = (sentinelConf % {"bindId":bindId,'password': password, 'sName': "myMaster", 'sIp': masterIp,
+            sentinelConf = (sentinelConf % {"bIp":bindId,'password': password, 'sName': "myMaster", 'sIp': masterIp,
                                                 'sPort': masterPort})
 
     with open('target/sentinel.conf', 'w') as f:
