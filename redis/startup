@@ -2,6 +2,7 @@
 ##本地定制网段
 docker network create --subnet=172.172.0.0/254 sxc-redis
 
+docker rm $(docker ps -aq) -f
 
 
 
@@ -14,8 +15,8 @@ python run.py  redis-slave  56389:6379  redis:slave-server sxc-redis 172.172.0.1
 
 
 
-python build-server.py  0.0.0.0 123456 m 172.172.0.3:6379
-python build-server.py  0.0.0.0 123456 s 172.172.0.3:6379
+python build-server.py  0.0.0.0 123456 m 172.172.0.3:6379 c
+python build-server.py  0.0.0.0 123456 s 172.172.0.3:6379 c
 
 
 python run.py  redis-master1 56279:6379  redis:master-server sxc-redis 172.172.0.3
@@ -23,8 +24,8 @@ python run.py  redis-slave1  56289:6379  redis:slave-server sxc-redis 172.172.0.
 
 
 
-python build-server.py  0.0.0.0 123456 m 172.172.0.4:6379
-python build-server.py  0.0.0.0 123456 s 172.172.0.4:6379
+python build-server.py  0.0.0.0 123456 m 172.172.0.4:6379 c
+python build-server.py  0.0.0.0 123456 s 172.172.0.4:6379 c
 
 
 python run.py  redis-master2 56179:6379  redis:master-server sxc-redis 172.172.0.4
