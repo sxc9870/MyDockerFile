@@ -14,14 +14,15 @@ def buildeMode(argv):
     mk_server=""
     mk_sentinel="##"
     redisConf = ""
+    mk=""
+    if mOrs == "m":  # MASTER节点镜像
+        mk="#"
     with open('src/redis.conf', 'r') as f:
             redisConf = f.read()
-            if mOrs == "m":  # MASTER节点镜像
-                redisConf = (redisConf % {'bIp': bindId, 'password': password, 'mk': "#", 'mIp': masterIp,
+
+            redisConf = (redisConf % {'bIp': bindId, 'password': password, 'mk': mk, 'mIp': masterIp,
                                           'mPort': masterPort})
-            else:
-                redisConf = (redisConf % {'bIp': bindId, 'password': password, 'mk': "", 'mIp': masterIp,
-                                          'mPort': masterPort})
+
     with open('target/redis.conf', 'w') as f:
             f.write(redisConf)
 
@@ -33,10 +34,10 @@ def buildeMode(argv):
     if mOrs == "m":
         cmd = "cd target && docker build -t redis:master  ."
     else:
-        cmd = "cd target && docker build -t redis:slave%s-%s ." % ("", masterPort)
+        cmd = "cd target && docker build -t redis:slave ."
     os.system(cmd)
 
 
 
 if __name__ == "__main__":
-    buildeMode(sys.argv,type)
+    buildeMode(sys.argv)
