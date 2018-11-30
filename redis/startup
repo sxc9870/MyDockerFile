@@ -5,8 +5,11 @@ docker network create --subnet=172.172.0.0/24 sxc-redis
 
 
 
-python build.py b 127.0.0.1,0.0.0.0 123456 m 172.172.0.2:6379
-python build.py  r redis-master2 56379:6379,46379:26379 redis:master sxc-redis 172.172.0.2
+python build-server.py  0.0.0.0 123456 m 172.172.0.2:6379
+python build-server.py  0.0.0.0 123456 s 172.172.0.2:6379
+
+
+python run-server.py  redis-master 56379:6379,46379:26379 redis:master sxc-redis 172.172.0.2
 
 
 
