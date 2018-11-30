@@ -5,8 +5,9 @@ import os
 
 
 def buildeMode(argv):
-    password = argv[1]#.input("请输入主节点密码：")  # 节点认证密码
-    masterIp =argv[2]  #input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口 与哨兵同一个IP
+    bindId = argv[1].replace(",", " \nbind ")  # 绑定IP 逗号分隔
+    password = argv[2]#.input("请输入主节点密码：")  # 节点认证密码
+    masterIp =argv[3]  #input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口 与哨兵同一个IP
     masterPort = masterIp.split(":")[1]  # 主节点端口
     masterIp = masterIp.split(":")[0]
     mk_server="##"
@@ -14,7 +15,7 @@ def buildeMode(argv):
     sentinelConf = ""
     with open('src/sentinel.conf', 'r') as f:
             sentinelConf = f.read()
-            sentinelConf = (sentinelConf % {'password': password, 'sName': "myMaster", 'sIp': masterIp,
+            sentinelConf = (sentinelConf % {"bindId":bindId,'password': password, 'sName': "myMaster", 'sIp': masterIp,
                                                 'sPort': masterPort})
 
     with open('target/sentinel.conf', 'w') as f:
