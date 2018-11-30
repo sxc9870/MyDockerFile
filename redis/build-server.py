@@ -29,7 +29,7 @@ def buildeMode(argv):
 
     with open('src/dockerfile', 'r') as f:
         with open('target/dockerfile', 'w') as f2:
-            f2.write(f.read() % {"mk-server":mk_server,"mk-sentinel":mk_sentinel})
+            f2.write(f.read() % {"mk_server":mk_server,"mk_sentinel":mk_sentinel})
     cmd = ""  # build命令,启动命令
     if mOrs == "m":
         cmd = "cd target && docker build -t redis:master  ."
