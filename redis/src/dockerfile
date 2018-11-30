@@ -11,8 +11,8 @@ RUN cd /etc/apk \
 && apk  --no-cache add busybox libgcc musl redis  \
 && touch /usr/bin/redis.sh \
 && echo >> /usr/bin/redis.sh \#!/bin/bash \
-&& echo >> /usr/bin/redis.sh /usr/bin/redis-server /usr/bin/redis.conf \
-&& echo >> /usr/bin/redis.sh /usr/bin/redis-sentinel /usr/bin/sentinel.conf \
+%(mk_server)s && echo >> /usr/bin/redis.sh /usr/bin/redis-server /usr/bin/redis.conf \
+%(mk_sentinel)s && echo >> /usr/bin/redis.sh /usr/bin/redis-sentinel /usr/bin/sentinel.conf \
 && echo >> /usr/bin/redis.sh /bin/sh \
 && chmod -R 777 /usr/bin/redis.sh \
 && mkdir -p /data/redis/

@@ -11,8 +11,7 @@ def buildeMode(argv,sentinelOrServer):
     masterIp =argv[5]  #input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口 与哨兵同一个IP
     masterPort = masterIp.split(":")[1]  # 主节点端口
     masterIp = masterIp.split(":")[0]
-    mk_server=""
-    mk_sentinel=""
+
     redisConf = ""
     sentinelConf = ""
     if sentinelOrServer=="server":
@@ -26,7 +25,6 @@ def buildeMode(argv,sentinelOrServer):
                                           'mPort': masterPort})
         with open('target/redis.conf', 'w') as f:
             f.write(redisConf)
-        mk_sentinel="##"
     elif sentinelOrServer=="sentinel":
         with open('src/sentinel.conf', 'r') as f:
             sentinelConf = f.read()
@@ -38,10 +36,10 @@ def buildeMode(argv,sentinelOrServer):
                                                 'sPort': masterPort})
         with open('target/sentinel.conf', 'w') as f:
             f.write(sentinelConf)
-        mk_server="##"
+
     with open('src/dockerfile', 'r') as f:
         with open('target/dockerfile', 'w') as f2:
-            f2.write(f.read() % {"mk-server":mk_server,"mk-sentinel":mk_sentinel})
+            f2.write(f.read())
     cmd = ""  # build命令,启动命令
     if mOrs == "m":
         cmd = "cd target && docker build -t redis:master  ."
@@ -50,7 +48,22 @@ def buildeMode(argv,sentinelOrServer):
     os.system(cmd)
 
 
+def runModel(argv):
+    containName = argv[2]  # 容器名称
+    portExplose = argv[3].replace(",", " -p ")  # 暴露端口 多个用,分割
+    imageName = argv[4]  # 镜像名称
+
+    networkName = argv[5]  # docker net节点名称
+    ip = argv[6]  # 指定容器IP
+    cmd = "cd target && docker run -itd  --name %(name)s --network %(networkName)s --ip %(ip)s  -p %(explose)s  %(imageName)s " % {"name": containName,
+                                                                                           "explose": portExplose,"ip":ip,"networkName":networkName,
+                                                                                           "imageName": imageName}
+    os.system(cmd)
+
 
 if __name__ == "__main__":
-    type = sys.argv[1]  #服务模式还是哨兵模式
-    buildeMode(sys.argv,type)
+    type = sys.argv[1]
+    if type == "b":  # 构建模式 用于build镜像
+        buildeMode(sys.argv)
+    elif type == "r":
+        runModel(sys.argv)
