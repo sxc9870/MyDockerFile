@@ -5,20 +5,20 @@ docker network create --subnet=172.172.0.0/24 sxc-redis
 
 
 
-python build-server.py  0.0.0.0 123456 m 172.172.0.2:6379
-python build-server.py  0.0.0.0 123456 s 172.172.0.2:6379
+python build-server.py  0.0.0.0 123456 m 172.172.0.4:6379
+python build-server.py  0.0.0.0 123456 s 172.172.0.4:6379
 
 
-python run-server.py  redis-master 56379:6379  redis:master-server sxc-redis 172.172.0.2
-python run-server.py  redis-slave  56380:6379  redis:slave-server sxc-redis 172.172.0.3
-python run-server.py  redis-slave2  56381:6379  redis:slave-server sxc-redis 172.172.0.4
+python run.py  redis-master2 56359:6379  redis:master-server sxc-redis 172.172.0.4
+python run.py  redis-slave2  56360:6379  redis:slave-server sxc-redis 172.172.0.14
+python run.py  redis-slave2  56381:6379  redis:slave-server sxc-redis 172.172.0.4
 
 
 
 python build-sentinel.py   0.0.0.0 123456 172.172.0.3:6379
-python run-server.py  redis-sentinel  46379:26379 redis:sentinel sxc-redis 172.172.0.12
-python run-server.py  redis-sentinel1  46380:26379 redis:sentinel sxc-redis 172.172.0.13
-python run-server.py  redis-sentinel2  46381:26379 redis:sentinel sxc-redis 172.172.0.14
+python run.py  redis-sentinel  46379:26379 redis:sentinel sxc-redis 172.172.0.12
+python run.py  redis-sentinel1  46380:26379 redis:sentinel sxc-redis 172.172.0.13
+python run.py  redis-sentinel2  46381:26379 redis:sentinel sxc-redis 172.172.0.14
 
 
 
@@ -26,4 +26,10 @@ python run-server.py  redis-sentinel2  46381:26379 redis:sentinel sxc-redis 172.
 docker exec -it redis-master  tail -f /data/redis/redis.log
 docker exec -it redis-sentinel  tail -f /data/redis/sentinel.log
 
-docker exec -it redis-slave  /bin/sh
+docker exec -it redis-slave  /usr/bin/redis-cli -a 123456 info replication
+docker exec -it redis-slave1  /usr/bin/redis-cli -a 123456 info replication
+docker exec -it redis-slave2  /usr/bin/redis-cli -a 123456 info replication
+
+
+
+{"host": "172.172.0.4", "port": "6379"},{"host": "172.172.0.2", "port": "6379"},{"host": "172.172.0.3", "port": "6379"},{"host": "172.172.0.14", "port": "6379"},{"host": "172.172.0.12", "port": "6379"},{"host": "172.172.0.13", "port": "6379"}
