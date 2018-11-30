@@ -12,3 +12,7 @@ python build-server.py  0.0.0.0 123456 s 172.172.0.2:6379
 python run-server.py  redis-master 56379:6379,46379:26379 redis:master-server sxc-redis 172.172.0.2
 python run-server.py  redis-slave  56380:6379,46380:26379 redis:slave-server sxc-redis 172.172.0.3
 python run-server.py  redis-slave2  56381:6379,46381:26379 redis:slave-server sxc-redis 172.172.0.4
+
+
+
+python build-sentinel.py  123456 172.172.0.2:6379
