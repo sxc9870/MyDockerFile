@@ -32,9 +32,9 @@ def buildeMode(argv):
             f2.write(f.read() % {"mk_server":mk_server,"mk_sentinel":mk_sentinel})
     cmd = ""  # build命令,启动命令
     if mOrs == "m":
-        cmd = "cd target && docker build -t redis:master  ."
+        cmd = "cd target && docker build -t redis:master-server  ."
     else:
-        cmd = "cd target && docker build -t redis:slave ."
+        cmd = "cd target && docker build -t redis:slave-server ."
     os.system(cmd)
 
 
