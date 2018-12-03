@@ -13,10 +13,10 @@ def buildeMode(argv):
     masterIp = masterIp.split(":")[0]
     mk = ""
     if argv[5] != "c":
-       mk="#"    #集群模式不允许slaveofxxx
-       cluster=""
+       cluster="#"  #非集群模式
     else:
-       cluster = "#"
+       mk = "#"    #集群模式不允许slaveofxxx
+       cluster = ""
 
     mk_server=""
     mk_sentinel="##"
