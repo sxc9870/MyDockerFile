@@ -11,12 +11,17 @@ def buildeMode(argv):
     masterIp =argv[4]  #input("从节点时指定主节点IP和端口(:分隔)：")  # 主节点iP端口 与哨兵同一个IP
     masterPort = masterIp.split(":")[1]  # 主节点端口
     masterIp = masterIp.split(":")[0]
+    mk = ""
+    if argv[5] != "c":
+       mk="#"    #集群模式不允许slaveofxxx
+       cluster=""
+    else:
+       cluster = "#"
 
-    cluster="#" if argv[5]!="c" else ""
     mk_server=""
     mk_sentinel="##"
     redisConf = ""
-    mk=""
+
     if mOrs == "m":  # MASTER节点镜像
         mk="#"
     with open('src/redis.conf', 'r') as f:
