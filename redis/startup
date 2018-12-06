@@ -28,10 +28,14 @@ python build-server.py  0.0.0.0 123456 m 172.172.0.4:6379 c
 python build-server.py  0.0.0.0 123456 s 172.172.0.4:6379 c
 
 
+python run.py  redis-master1 56279:6379  redis:master-server sxc-redis 172.172.0.3
+python run.py  redis-slave1  56289:6379  redis:slave-server sxc-redis 172.172.0.13
+
 python run.py  redis-master2 56179:6379  redis:master-server sxc-redis 172.172.0.4
 python run.py  redis-slave2  56189:6379  redis:slave-server sxc-redis 172.172.0.14
 
-
+python run.py  redis-master3 56079:6379  redis:master-server sxc-redis 172.172.0.5
+python run.py  redis-slave3  56089:6379  redis:slave-server sxc-redis 172.172.0.15
 
 
 python build-sentinel.py   0.0.0.0 123456 172.172.0.3:6379
@@ -52,3 +56,14 @@ docker exec -it redis-slave2  /usr/bin/redis-cli -a 123456 info replication
 
 
 {"host": "172.172.0.4", "port": "6379"},{"host": "172.172.0.2", "port": "6379"},{"host": "172.172.0.3", "port": "6379"},{"host": "172.172.0.14", "port": "6379"},{"host": "172.172.0.12", "port": "6379"},{"host": "172.172.0.13", "port": "6379"}
+
+
+./redis-trib.rb  create --replicas 1 172.172.0.4:6379 172.172.0.3:6379 172.172.0.2:6379 172.172.0.14:6379 172.172.0.13:6379 172.172.0.12:6379
+
+redis-cli --cluster create 192.168.239.130:56279 192.168.239.130:56179 192.168.239.130:56079 192.168.239.130:56289 192.168.239.130:56189 192.168.239.130:56089 --cluster-replicas 1 -a 123456
+redis-cli --cluster create 172.172.0.4:6379 172.172.0.3:56279 172.172.0.2:6379 172.172.0.14:6379 172.172.0.13:6379 172.172.0.12:6379 --cluster-replicas 1 -a 123456
+
+
+# 要带-a 密码访问 不然每次转移都会显示没有权限
+redis-cli -h 172.172.0.2  -c -a 123456
+--cluster create 127.0.0.1:56279 127.0.0.1:56179 127.0.0.1:56079 127.0.0.10:56289 127.0.0.1:56189 127.0.0.1:56089 --cluster-replicas 1 -a 123456

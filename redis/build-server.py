@@ -41,7 +41,7 @@ def buildeMode(argv):
     if mOrs == "m":
         cmd = "cd target && docker build -t redis:master-server  ."
     else:
-        cmd = "cd target && docker build -t redis:slave-server ."
+        cmd = "cd target && docker build -t redis:slave-server"+masterIp.split(".")[3]+" ."
     os.system(cmd)
 
 
