@@ -5,14 +5,15 @@ docker network create --subnet=172.172.0.0/254 sxc-redis
 docker rm $(docker ps -aq) -f
 
 
-
+python build-server.py  0.0.0.0 123456 m 172.172.0.2:6379 o
+python build-server.py  0.0.0.0 123456 s 172.172.0.2:6379 o
 python build-server.py  0.0.0.0 123456 m 172.172.0.2:6379 c
 python build-server.py  0.0.0.0 123456 s 172.172.0.2:6379 c
 
 
 python run.py  redis-master 56379:6379  redis:master-server sxc-redis 172.172.0.2
-python run.py  redis-slave  56389:6379  redis:slave-server sxc-redis 172.172.0.12
-
+python run.py  redis-slave  56389:6379  redis:slave-server2 sxc-redis 172.172.0.12
+python run.py  redis-slave  56399:6379  redis:slave-server2 sxc-redis 172.172.0.22
 
 
 python build-server.py  0.0.0.0 123456 m 172.172.0.3:6379 c
@@ -67,3 +68,12 @@ redis-cli --cluster create 172.172.0.4:6379 172.172.0.3:56279 172.172.0.2:6379 1
 # 要带-a 密码访问 不然每次转移都会显示没有权限
 redis-cli -h 172.172.0.2  -c -a 123456
 --cluster create 127.0.0.1:56279 127.0.0.1:56179 127.0.0.1:56079 127.0.0.10:56289 127.0.0.1:56189 127.0.0.1:56089 --cluster-replicas 1 -a 123456
+
+
+
+docker run -itd  --name redis1 --net=host   -p 56397:6397  redis-master
+docker run -itd  --name redis2 --net=host   -p 56398:6397  redis-master
+docker run -itd  --name redis3 --net=host   -p 56399:6397  redis-master
+docker run -itd  --name redis4 --net=host   -p 56497:6397  redis-master
+docker run -itd  --name redis5 --net=host   -p 56498:6397  redis-master
+docker run -itd  --name redis6 --net=host   -p 56499:6397  redis-master

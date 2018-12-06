@@ -17,5 +17,5 @@ RUN cd /etc/apk \
 && chmod -R 777 /usr/bin/redis.sh \
 && mkdir -p /data/redis/
 
-
+VOLUME ["/data/redis/"]
 CMD ["sh","/usr/bin/redis.sh"]
