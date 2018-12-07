@@ -1,7 +1,7 @@
 version: '3'
 services:
   sxc-redis:
-    build: .
+    build: . -t redis:master-server
     environment:
       - PASSWORD=123456
     volumes:
