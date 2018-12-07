@@ -1,15 +1,15 @@
 version: '3'
 services:
-  sxc-redis:
+  master:
       build:
         context: .
         args:
-          password: password123456
+          password: 123456
       image: redis:master
       environment:
         - PASSWORD=123456
       volumes:
         - /data/redis:/data/redis
       ports:
-        - "5000:5000"
+        - "6379:6379"
       tty: true
