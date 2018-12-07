@@ -58,7 +58,7 @@ services:
     volumes:
       - $PWD/data/redis/sentinel2:/data/redis
     ports:
-      - "26378:26379"
+      - "26376:26379"
     tty: true
     command:
       - /bin/sh
@@ -79,7 +79,7 @@ services:
     volumes:
       - $PWD/data/redis/sentinel3:/data/redis
     ports:
-      - "26378:26379"
+      - "26377:26379"
     tty: true
     command:
       - /bin/sh
