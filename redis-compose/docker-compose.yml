@@ -7,3 +7,4 @@ services:
       - $PWD/data/master:/data
     ports:
       - "6379:6379"
+
