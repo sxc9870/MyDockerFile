@@ -1,17 +1,38 @@
 version: '3'
 services:
   sentinel1:
+    image: redis:master
+    volumes:
+      - $PWD/data/redis/sentinel1:/data/redis
+    ports:
+      - "26378:26379"
+    tty: true
+    command:
+      - /bin/sh
+      - -c
+      - |
+        sed -i '1i\sentinel monitor myMaster master 6379 2' /sentinel.conf
+        sed -i '2i\sentinel auth-pass myMaster $PASSWORD' /sentinel.conf
+        sed -i '3i\sentinel down-after-milliseconds myMaster 5000' /sentinel.conf
+        sed -i '4i\sentinel parallel-syncs myMaster 1' /sentinel.conf
+        sed -i '5i\sentinel failover-timeout myMaster 60000' /sentinel.conf
+        redis-sentinel   /sentinel.conf   --masterauth $PASSWORD --requirepass $PASSWORD
+    depends_on:
+      - master
+    links:
+      - master
+  sentinel2:
       image: redis:master
       volumes:
-        - $PWD/data/redis/sentinel1:/data/redis
+        - $PWD/data/redis/sentinel2:/data/redis
       ports:
-        - "26378:26379"
+        - "26376:26379"
       tty: true
       command:
         - /bin/sh
         - -c
         - |
-          sed -i '1i\sentinel monitor myMaster master:6379 2' /sentinel.conf
+          sed -i '1i\sentinel monitor myMaster master 6379 2' /sentinel.conf
           sed -i '2i\sentinel auth-pass myMaster $PASSWORD' /sentinel.conf
           sed -i '3i\sentinel down-after-milliseconds myMaster 5000' /sentinel.conf
           sed -i '4i\sentinel parallel-syncs myMaster 1' /sentinel.conf
@@ -21,7 +42,27 @@ services:
         - master
       links:
         - master
-
+  sentinel3:
+      image: redis:master
+      volumes:
+        - $PWD/data/redis/sentinel3:/data/redis
+      ports:
+        - "26377:26379"
+      tty: true
+      command:
+        - /bin/sh
+        - -c
+        - |
+          sed -i '1i\sentinel monitor myMaster master 6379 2' /sentinel.conf
+          sed -i '2i\sentinel auth-pass myMaster $PASSWORD' /sentinel.conf
+          sed -i '3i\sentinel down-after-milliseconds myMaster 5000' /sentinel.conf
+          sed -i '4i\sentinel parallel-syncs myMaster 1' /sentinel.conf
+          sed -i '5i\sentinel failover-timeout myMaster 60000' /sentinel.conf
+          redis-sentinel   /sentinel.conf   --masterauth $PASSWORD --requirepass $PASSWORD
+      depends_on:
+        - master
+      links:
+        - master
 
 
 
