@@ -71,8 +71,8 @@ redis-cli -h 172.172.0.2  -c -a 123456
 
 
 
-docker run -itd  --name redis1 --net=host   -p 56397:6397  redis-master
-docker run -itd  --name redis2 --net=host   -p 56398:6397  redis-master
+docker run -itd  --name redis1    redis-master
+docker run -itd  --name redis2    redis-master
 docker run -itd  --name redis3 --net=host   -p 56399:6397  redis-master
 docker run -itd  --name redis4 --net=host   -p 56497:6397  redis-master
 docker run -itd  --name redis5 --net=host   -p 56498:6397  redis-master

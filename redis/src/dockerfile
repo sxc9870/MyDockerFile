@@ -4,18 +4,17 @@ MAINTAINER  sxc 35631371@qq.com
 
 COPY redis.conf /usr/bin/
 COPY sentinel.conf /usr/bin/
-
+COPY startup.sh /usr/bin/startup.sh
 RUN cd /etc/apk \
 && sed 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.aliyun.com/g' -i /etc/apk/repositories \
 && apk update \
 && apk  --no-cache add busybox libgcc musl redis  \
-&& touch /usr/bin/redis.sh \
-&& echo >> /usr/bin/redis.sh \#!/bin/bash \
-%(mk_server)s && echo >> /usr/bin/redis.sh /usr/bin/redis-server /usr/bin/redis.conf \
-%(mk_sentinel)s && echo >> /usr/bin/redis.sh /usr/bin/redis-sentinel /usr/bin/sentinel.conf \
-&& echo >> /usr/bin/redis.sh /bin/sh \
-&& chmod -R 777 /usr/bin/redis.sh \
+
+%(mk_server)s && echo >> /usr/bin/startup.sh /usr/bin/redis-server /usr/bin/redis.conf \
+%(mk_sentinel)s && echo >> /usr/bin/startup.sh /usr/bin/redis-sentinel /usr/bin/sentinel.conf \
+#&& echo >> /usr/bin/startup.sh /bin/sh \
+&& chmod -R 777 /usr/bin/startup.sh \
 && mkdir -p /data/redis/
 
 VOLUME ["/data/redis/"]
-CMD ["sh","/usr/bin/redis.sh"]
+CMD ["sh","/usr/bin/startup.sh"]
