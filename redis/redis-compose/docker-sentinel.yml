@@ -7,9 +7,9 @@ services:
       ports:
         - "26378:26379"
       tty: true
-      command: redis-sentinel   /sentinel.conf   --masterauth $PASSWORD --requirepass $PASSWORD \
-      --sentinel monitor mymaster master:6379 2 --sentinel auth-pass mymaster $PASSWORD  \
-      --sentinel down-after-milliseconds mymaster 5000  --sentinel parallel-syncs mymaster 1 \
+      command: redis-sentinel   /sentinel.conf   --masterauth $PASSWORD --requirepass $PASSWORD\
+      --sentinel monitor mymaster master:6379 2 --sentinel auth-pass mymaster $PASSWORD\
+      --sentinel down-after-milliseconds mymaster 5000  --sentinel parallel-syncs mymaster 1\
       --sentinel failover-timeout mymaster 60000
       depends_on:
         - master
