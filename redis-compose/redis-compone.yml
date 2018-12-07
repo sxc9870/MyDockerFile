@@ -1,8 +1,11 @@
 version: '3'
 services:
-  mariadb:
-    image: 'sxc/redis'
+  sxc-redis:
+    build: .
     environment:
       - PASSWORD=123456
     volumes:
       - /data/redis:/data/redis
+    ports:
+      - "5000:5000"
+
