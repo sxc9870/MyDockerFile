@@ -13,7 +13,7 @@ services:
       ports:
         - "6378:6379"
       tty: true
-      command: redis-server   /redis.conf  --slaveof master 6379 --masterauth $PASSWORD --requirepass $PASSWORD
+      command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   slave1:
       image: redis:master
       volumes:
@@ -23,3 +23,12 @@ services:
       links:
           - master
       command: redis-server   /redis.conf  --slaveof master 6379 --masterauth $PASSWORD --requirepass $PASSWORD
+  slave2:
+    image: redis:master
+    volumes:
+      - $PWD/data/redis/slave2:/data/redis
+    depends_on:
+      - master
+    links:
+      - master
+    command: redis-server   /redis.conf  --slaveof master 6379 --masterauth $PASSWORD --requirepass $PASSWORD
