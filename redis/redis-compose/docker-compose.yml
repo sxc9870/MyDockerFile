@@ -9,7 +9,8 @@ services:
       environment:
         - PASSWORD=123456
       volumes:
-        - /data/redis:/data/redis
+        - /data/redis/master:/data/redis
       ports:
         - "6379:6379"
       tty: true
+      command: redis-server  --masterauth $PASSWORD --requirepass $PASSWORD
