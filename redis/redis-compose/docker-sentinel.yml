@@ -7,10 +7,13 @@ services:
       ports:
         - "26378:26379"
       tty: true
-      command: redis-sentinel   /sentinel.conf   --masterauth $PASSWORD --requirepass $PASSWORD\
-       --sentinel monitor mymaster master:6379 2 --sentinel auth-pass mymaster $PASSWORD\
-       --sentinel down-after-milliseconds mymaster 5000  --sentinel parallel-syncs mymaster 1\
-       --sentinel failover-timeout mymaster 60000
+      command:
+        sed -i '1i\sentinel monitor mymaster master:6379 2' sentinel.conf\
+        sed -i '1i\sentinel auth-pass mymaster $PASSWORD' sentinel.conf\
+        sed -i '1i\sentinel down-after-milliseconds mymaster 5000' sentinel.conf\
+        sed -i '1i\sentinel parallel-syncs mymaster 1' sentinel.conf\
+        sed -i '1i\sentinel failover-timeout mymaster 60000' sentinel.conf\
+        redis-sentinel   /sentinel.conf   --masterauth $PASSWORD --requirepass $PASSWORD
       depends_on:
         - master
       links:
