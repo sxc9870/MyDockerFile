@@ -2,9 +2,9 @@ version: '3'
 services:
   sxc-redis:
     build: .
+      args:
+        password: password
     image: redis:master
-    args:
-      password: password
     environment:
       - PASSWORD=123456
     volumes:
