@@ -12,10 +12,10 @@ services:
         - -c
         - |
           sed -i '1i\sentinel monitor myMaster master:6379 2' /sentinel.conf
-          sed -i '1i\sentinel auth-pass myMaster $PASSWORD' /sentinel.conf
-          sed -i '1i\sentinel down-after-milliseconds myMaster 5000' /sentinel.conf
-          sed -i '1i\sentinel parallel-syncs myMaster 1' /sentinel.conf
-          sed -i '1i\sentinel failover-timeout myMaster 60000' /sentinel.conf
+          sed -i '2i\sentinel auth-pass myMaster $PASSWORD' /sentinel.conf
+          sed -i '3i\sentinel down-after-milliseconds myMaster 5000' /sentinel.conf
+          sed -i '4i\sentinel parallel-syncs myMaster 1' /sentinel.conf
+          sed -i '5i\sentinel failover-timeout myMaster 60000' /sentinel.conf
           redis-sentinel   /sentinel.conf   --masterauth $PASSWORD --requirepass $PASSWORD
       depends_on:
         - master
