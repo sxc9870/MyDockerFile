@@ -1,15 +1,9 @@
 version: '3'
 services:
-  sxc-redis:
-    build:
-      context: .
-      args:
-        password: password
-    image: redis:master
-    environment:
-      - PASSWORD=123456
+  master:
+    image: redis:4.0.10-alpine
+    comman: redis-server --appendonly yes --masterauth $REDIS_PASSWORD --requirepass $REDIS_PASSWORD
     volumes:
-      - /data/redis:/data/redis
+      - $PWD/data/master:/data
     ports:
-      - "5000:5000"
-
+      - "6379:6379"
