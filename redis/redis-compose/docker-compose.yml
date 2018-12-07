@@ -13,4 +13,4 @@ services:
       ports:
         - "6379:6379"
       tty: true
-      command: redis-server   /redis.conf   --masterauth $password --requirepass $PASSWORD
+      command: redis-server   /redis.conf   --masterauth ${PASSWORD} --requirepass ${PASSWORD}
