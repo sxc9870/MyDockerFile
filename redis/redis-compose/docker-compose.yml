@@ -5,7 +5,7 @@ services:
         context: .
         args:
           password: 123456
-      image: redis:master
+      #image: redis:master
       environment:
         - PASSWORD=123456
       volumes:
