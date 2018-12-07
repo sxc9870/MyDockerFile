@@ -1,7 +1,8 @@
 version: '3'
 services:
   sxc-redis:
-    build: .
+    build:
+      context: .
       args:
         password: password
     image: redis:master
