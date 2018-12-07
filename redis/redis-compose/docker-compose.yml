@@ -9,8 +9,17 @@ services:
       environment:
         - PASSWORD=123456
       volumes:
-        - /data/redis/master:/data/redis
+        - $PWD/data/redis/master:/data/redis
       ports:
-        - "6379:6379"
+        - "6378:6379"
       tty: true
-      command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
+      command: redis-server   /redis.conf  --slaveof master 6379 --masterauth $PASSWORD --requirepass $PASSWORD
+  slave1:
+      image: redis:master
+      volumes:
+         - $PWD/data/redis/slave1:/data/redis
+      depends_on:
+          - master
+      inks:
+          - master
+      command: redis-server   /redis.conf  --slaveof master 6379 --masterauth $PASSWORD --requirepass $PASSWORD
