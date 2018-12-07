@@ -1,9 +1,15 @@
 version: '3'
 services:
-  master:
-    image: redis:4.0.10-alpine
-    command: redis-server --appendonly yes --masterauth $REDIS_PASSWORD --requirepass $REDIS_PASSWORD
-    volumes:
-      - $PWD/data/master:/data
-    ports:
-      - "6379:6379"
+  sxc-redis:
+      build:
+        context: .
+        args:
+          password: password123456
+      image: redis:master
+      environment:
+        - PASSWORD=123456
+      volumes:
+        - /data/redis:/data/redis
+      ports:
+        - "5000:5000"
+      tty: true
