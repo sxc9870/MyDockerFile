@@ -20,6 +20,6 @@ services:
          - $PWD/data/redis/slave1:/data/redis
       depends_on:
           - master
-      inks:
+      links:
           - master
       command: redis-server   /redis.conf  --slaveof master 6379 --masterauth $PASSWORD --requirepass $PASSWORD
