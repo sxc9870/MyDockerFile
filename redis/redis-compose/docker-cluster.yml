@@ -76,6 +76,6 @@ services:
     volumes:
       - $PWD/data/redis/master6:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
-  networks:
+networks:
      redis:
        driver: redis-driver
