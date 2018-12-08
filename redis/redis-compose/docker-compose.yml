@@ -4,7 +4,7 @@ services:
       build:
         context: .
         args:
-          password: 123456
+          cluster: "#"   #注解掉集群
       image: redis:master
       environment:
         - PASSWORD=123456
