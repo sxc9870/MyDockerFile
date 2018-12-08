@@ -9,6 +9,7 @@ services:
       container_name: master1
       networks:
         redis:
+          ipv4_address: 172.19.0.2
           aliases:
             - master1
       ports:
@@ -21,6 +22,7 @@ services:
     container_name: master2
     networks:
       redis:
+        ipv4_address: 172.19.0.3
         aliases:
           - master2
     ports:
@@ -32,6 +34,7 @@ services:
       image: redis:cluster
       networks:
         redis:
+          ipv4_address: 172.19.0.4
           aliases:
             - master3
       container_name: master3
@@ -44,6 +47,7 @@ services:
     image: redis:cluster
     networks:
       redis:
+        ipv4_address: 172.19.0.5
         aliases:
           - master4
     container_name: master4
@@ -56,6 +60,7 @@ services:
     image: redis:cluster
     networks:
       redis:
+        ipv4_address: 172.19.0.6
         aliases:
           - master5
     container_name: master5
@@ -68,6 +73,7 @@ services:
     image: redis:cluster
     networks:
        redis:
+         ipv4_address: 172.19.0.7
          aliases:
            - master6
     container_name: master6
@@ -77,4 +83,8 @@ services:
       - $PWD/data/redis/master6:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
 networks:
-     redis:
+  redis:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+          gateway: 172.19.0.1
