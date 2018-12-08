@@ -8,7 +8,9 @@ services:
       image: redis:cluster
       container_name: master1
       networks:
-        - master1
+        redis:
+          aliases:
+            - master1
       ports:
         - "6378:6379"
       volumes:
@@ -18,7 +20,9 @@ services:
     image: redis:cluster
     container_name: master2
     networks:
-      - master2
+      redis:
+        aliases:
+          - master2
     ports:
       - "6377:6379"
     volumes:
@@ -27,7 +31,9 @@ services:
   master3:
       image: redis:cluster
       networks:
-        - master3
+        redis:
+          aliases:
+            - master3
       container_name: master3
       ports:
         - "6376:6379"
@@ -37,7 +43,9 @@ services:
   master4:
     image: redis:cluster
     networks:
-      - master4
+      redis:
+        aliases:
+          - master4
     container_name: master4
     ports:
       - "6375:6379"
@@ -47,7 +55,9 @@ services:
   master5:
     image: redis:cluster
     networks:
-      - master5
+      redis:
+        aliases:
+          - master5
     container_name: master5
     ports:
       - "6374:6379"
@@ -57,7 +67,9 @@ services:
   master6:
     image: redis:cluster
     networks:
-      - master6
+       redis:
+         aliases:
+           - master6
     container_name: master6
     ports:
       - "6373:6379"
@@ -65,9 +77,4 @@ services:
       - $PWD/data/redis/master6:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   networks:
-    master1:
-    master2:
-    master3:
-    master4:
-    master5:
-    master6:
+     redis:
