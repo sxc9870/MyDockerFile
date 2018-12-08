@@ -7,6 +7,8 @@ services:
           cluster: ""  #放开集群注释
       image: redis:cluster
       container_name: master1
+      networks:
+        - master1
       ports:
         - "6378:6379"
       volumes:
@@ -15,6 +17,8 @@ services:
   master2:
     image: redis:cluster
     container_name: master2
+    networks:
+      - master2
     ports:
       - "6377:6379"
     volumes:
@@ -22,6 +26,8 @@ services:
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master3:
       image: redis:cluster
+      networks:
+        - master3
       container_name: master3
       ports:
         - "6376:6379"
@@ -30,6 +36,8 @@ services:
       command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master4:
     image: redis:cluster
+    networks:
+      - master4
     container_name: master4
     ports:
       - "6375:6379"
@@ -38,6 +46,8 @@ services:
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master5:
     image: redis:cluster
+    networks:
+      - master5
     container_name: master5
     ports:
       - "6374:6379"
@@ -46,9 +56,18 @@ services:
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master6:
     image: redis:cluster
+    networks:
+      - master6
     container_name: master6
     ports:
       - "6373:6379"
     volumes:
       - $PWD/data/redis/master6:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
+  networks:
+    master1:
+    master2:
+    master3:
+    master4:
+    master5:
+    master6:
