@@ -78,3 +78,4 @@ services:
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   networks:
      redis:
+       driver: redis-driver
