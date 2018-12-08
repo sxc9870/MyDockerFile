@@ -6,31 +6,43 @@ services:
         args:
           cluster: ""  #放开集群注释
       image: redis:cluster
+      ports:
+        - "6378:6379"
       volumes:
         - $PWD/data/redis/master1:/data/redis
       command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master2:
     image: redis:cluster
+    ports:
+      - "6377:6379"
     volumes:
       - $PWD/data/redis/master2:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master3:
       image: redis:cluster
+      ports:
+        - "6376:6379"
       volumes:
         - $PWD/data/redis/master3:/data/redis
       command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master4:
     image: redis:cluster
+    ports:
+      - "6375:6379"
     volumes:
       - $PWD/data/redis/master4:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master5:
     image: redis:cluster
+    ports:
+      - "6374:6379"
     volumes:
       - $PWD/data/redis/master5:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master6:
     image: redis:cluster
+    ports:
+      - "6373:6379"
     volumes:
       - $PWD/data/redis/master6:/data/redis
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
