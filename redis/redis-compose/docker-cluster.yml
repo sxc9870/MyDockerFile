@@ -9,7 +9,7 @@ services:
       container_name: master1
       networks:
         redis:
-          ipv4_address: 172.19.0.2
+          ipv4_address: 172.101.0.2
           aliases:
             - master1
       ports:
@@ -22,7 +22,7 @@ services:
     container_name: master2
     networks:
       redis:
-        ipv4_address: 172.19.0.3
+        ipv4_address: 172.101.0.3
         aliases:
           - master2
     ports:
@@ -34,7 +34,7 @@ services:
       image: redis:cluster
       networks:
         redis:
-          ipv4_address: 172.19.0.4
+          ipv4_address: 172.101.0.4
           aliases:
             - master3
       container_name: master3
@@ -47,7 +47,7 @@ services:
     image: redis:cluster
     networks:
       redis:
-        ipv4_address: 172.19.0.5
+        ipv4_address: 172.101.0.5
         aliases:
           - master4
     container_name: master4
@@ -60,7 +60,7 @@ services:
     image: redis:cluster
     networks:
       redis:
-        ipv4_address: 172.19.0.6
+        ipv4_address: 172.101.0.6
         aliases:
           - master5
     container_name: master5
@@ -73,7 +73,7 @@ services:
     image: redis:cluster
     networks:
        redis:
-         ipv4_address: 172.19.0.7
+         ipv4_address: 172.101.0.7
          aliases:
            - master6
     container_name: master6
@@ -86,4 +86,4 @@ networks:
   redis:
     ipam:
       config:
-        - subnet: 172.19.0.0/16
+        - subnet: 172.101.0.0/16
