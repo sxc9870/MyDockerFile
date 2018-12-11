@@ -10,4 +10,3 @@ services:
         - $PWD/data/tomcat1:/usr/local/tomcat
       tty: true
       container_name: tomcat1
-      command:  /usr/local/tomcat/bin/catalina.sh run
