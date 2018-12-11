@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nginx:
+      build:
+        context: .
+      image: nginx:master
+      environment:
+        - PASSWORD=123456
+      volumes:
+        - $PWD/data/nginx/master:/data/nginx
+      ports:
+        - "80:80"
+      tty: true
+

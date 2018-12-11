@@ -1,2 +1,4 @@
 Q.容器PING不通
 A.route add 容器IP mask 255.255.255.0 虚拟机IP
+docker run -itd --name mytomcat   tomcat:8.5
+docker build -t tomcat:8.5  .
