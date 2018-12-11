@@ -7,8 +7,9 @@ services:
       environment:
         - PASSWORD=123456
       volumes:
-        - $PWD/data/nginx/master:/data/nginx
+        - $PWD/data/nginx:logs
       ports:
         - "80:80"
       tty: true
+      container_name: nginx
 
