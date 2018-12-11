@@ -7,7 +7,7 @@ services:
       environment:
         - PASSWORD=123456
       volumes:
-        - $PWD/data/nginx/logs:/logs
+        - $PWD/data/nginx/logs:/data/nginx/logs
         - $PWD/static:/data/nginx/static
       ports:
         - "80:80"
