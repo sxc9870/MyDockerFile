@@ -8,6 +8,7 @@ services:
         - PASSWORD=123456
       volumes:
         - $PWD/data/nginx/logs:/logs
+        - $PWD/static:/data/nginx/static
       ports:
         - "80:80"
       tty: true
