@@ -4,4 +4,4 @@ MAINTAINER  sxc 35631371@qq.com
 #COPY static-html-directory /usr/share/nginx/html
 #COPY redis.conf /usr/local/tomcat
 copy nginx.conf.default /etc/nginx/nginx.conf
-COPY static/ /usr/share/nginx/htm
+COPY static/ /data/nginx/static

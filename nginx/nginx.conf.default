@@ -41,7 +41,7 @@ http {
         access_log  /logs/host.access.log  main;
 
         location / {
-            root   html;
+            root   /data/nginx/static;
             index  index.html index.htm;
         }
 
