@@ -14,7 +14,6 @@ services:
       tty: true
       networks:
         - nginx
-        - backend
       container_name: nginx
       command:
         - /bin/sh
