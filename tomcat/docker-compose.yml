@@ -11,6 +11,8 @@ services:
       tty: true
       container_name: tomcat1
       networks:
-        - tomcat
+        - tomcats
 networks:
-  tomcat:
+  tomcats:
+    external: true
+    name: tomcats
