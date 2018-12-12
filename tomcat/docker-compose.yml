@@ -10,3 +10,4 @@ services:
         - $PWD/data/tomcat1:/usr/local/tomcat
       tty: true
       container_name: tomcat1
+      command: /bin/sh
