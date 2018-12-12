@@ -12,8 +12,6 @@ services:
       ports:
         - "80:80"
       tty: true
-      networks:
-        - nginx
       container_name: nginx
       command:
         - /bin/sh
