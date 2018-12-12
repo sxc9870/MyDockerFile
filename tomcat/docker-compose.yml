@@ -10,15 +10,5 @@ services:
        # - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
       tty: true
       container_name: tomcat1
-      ports:
-        - "8080:8080"
-      networks:
-        tomcat:
-          ipv4_address: 172.102.0.2
-          aliases:
-            - tomcat1
-networks:
-  tomcat:
-    ipam:
-      config:
-        - subnet: 172.102.0.0/16
+      network_mode: "service:nginx"
+
