@@ -6,7 +6,17 @@ services:
       image: tomcat:8.5
       environment:
         - PASSWORD=123456
-      volumes:
-        - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
+      #volumes:
+       # - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
       tty: true
       container_name: tomcat1
+      networks:
+        tomcat:
+          ipv4_address: 172.102.0.2
+          aliases:
+            - tomcat1
+networks:
+  tomcat:
+    ipam:
+      config:
+        - subnet: 172.102.0.0/16
