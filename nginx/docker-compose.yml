@@ -11,8 +11,6 @@ services:
         - $PWD/static:/data/nginx/static
       ports:
         - "80:80"
-      external_links:
-        - tomcat1
       networks:
         - tomcats
       tty: true
