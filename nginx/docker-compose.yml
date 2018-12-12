@@ -29,5 +29,5 @@ services:
       #depends_on:
       #  - tomcat1
 networks:
-      tomcats
+      tomcats:
       external: true
