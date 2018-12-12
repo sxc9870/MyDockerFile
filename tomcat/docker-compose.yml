@@ -7,7 +7,7 @@ services:
       environment:
         - PASSWORD=123456
       volumes:
-        - $PWD/data/tomcat1:/usr/local/tomcat
+        - $PWD/data/tomcat/app:/usr/local/tomcat/app
       tty: true
       container_name: tomcat1
       command: /bin/sh
