@@ -6,6 +6,7 @@ services:
       image: nginx:master
       environment:
         - PASSWORD=123456
+        - TZ=Asia/Shanghai
       volumes:
         - $PWD/data/nginx/logs:/data/nginx/logs
         - $PWD/static:/data/nginx/static

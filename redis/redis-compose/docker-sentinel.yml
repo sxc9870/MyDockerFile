@@ -7,6 +7,9 @@ services:
     ports:
       - "26378:26379"
     tty: true
+    environment:
+      - PASSWORD=123456
+      - TZ=Asia/Shanghai
     command:
       - /bin/sh
       - -c
@@ -23,6 +26,9 @@ services:
       - master
   sentinel2:
       image: redis:master
+      environment:
+        - PASSWORD=123456
+        - TZ=Asia/Shanghai
       volumes:
         - $PWD/data/redis/sentinel2:/data/redis
       ports:
@@ -44,6 +50,9 @@ services:
         - master
   sentinel3:
       image: redis:master
+      environment:
+        - PASSWORD=123456
+        - TZ=Asia/Shanghai
       volumes:
         - $PWD/data/redis/sentinel3:/data/redis
       ports:

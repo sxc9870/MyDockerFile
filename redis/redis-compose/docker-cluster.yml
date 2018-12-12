@@ -7,6 +7,9 @@ services:
           cluster: ""  #放开集群注释
       image: redis:cluster
       container_name: master1
+      environment:
+        - PASSWORD=123456
+        - TZ=Asia/Shanghai
       networks:
         redis:
           ipv4_address: 172.101.0.2
@@ -20,6 +23,9 @@ services:
   master2:
     image: redis:cluster
     container_name: master2
+    environment:
+      - PASSWORD=123456
+      - TZ=Asia/Shanghai
     networks:
       redis:
         ipv4_address: 172.101.0.3
@@ -32,6 +38,9 @@ services:
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master3:
       image: redis:cluster
+      environment:
+        - PASSWORD=123456
+        - TZ=Asia/Shanghai
       networks:
         redis:
           ipv4_address: 172.101.0.4
@@ -45,6 +54,9 @@ services:
       command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master4:
     image: redis:cluster
+    environment:
+      - PASSWORD=123456
+      - TZ=Asia/Shanghai
     networks:
       redis:
         ipv4_address: 172.101.0.5
@@ -58,6 +70,9 @@ services:
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master5:
     image: redis:cluster
+    environment:
+      - PASSWORD=123456
+      - TZ=Asia/Shanghai
     networks:
       redis:
         ipv4_address: 172.101.0.6
@@ -71,6 +86,9 @@ services:
     command: redis-server   /redis.conf   --masterauth $PASSWORD --requirepass $PASSWORD
   master6:
     image: redis:cluster
+    environment:
+      - PASSWORD=123456
+      - TZ=Asia/Shanghai
     networks:
        redis:
          ipv4_address: 172.101.0.7
