@@ -14,7 +14,6 @@ services:
       external_links:
         - tomcat1
       networks:
-        - default
         - tomcats
       tty: true
       container_name: nginx
@@ -30,4 +29,3 @@ services:
       #  - tomcat1
 networks:
       tomcats:
-      external: true
