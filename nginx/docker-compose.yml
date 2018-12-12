@@ -12,7 +12,7 @@ services:
       ports:
         - "80:80"
       networks:
-        - front
+        - tomcat
       tty: true
       container_name: nginx
       command:
@@ -25,5 +25,3 @@ services:
       #  - tomcat1:t1
       #depends_on:
       #  - tomcat1
-networks:
-  front:

@@ -11,5 +11,6 @@ services:
       tty: true
       container_name: tomcat1
       networks:
-        - front
-
+        - tomcat
+networks:
+  tomcat:
