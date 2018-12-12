@@ -1,9 +1,11 @@
-version: '3'
+version: '3.5'
 services:
   tomcat1:
       build:
         context: .
       image: tomcat:8.5
+      networks:
+        - tomcats
       environment:
         - PASSWORD=123456
       #volumes:
