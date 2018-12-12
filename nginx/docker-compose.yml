@@ -11,8 +11,8 @@ services:
         - $PWD/static:/data/nginx/static
       ports:
         - "80:80"
-      networks:
-        - tomcat
+
+      network_mode: "service:tomcat"
       tty: true
       container_name: nginx
       command:
