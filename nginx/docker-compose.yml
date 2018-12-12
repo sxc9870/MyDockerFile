@@ -13,9 +13,9 @@ services:
         - "80:80"
       external_links:
         - tomcat1
-    networks:
-      - default
-      - tomcats
+      networks:
+        - default
+        - tomcats
       tty: true
       container_name: nginx
       command:
