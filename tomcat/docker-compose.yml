@@ -10,5 +10,6 @@ services:
        # - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
       tty: true
       container_name: tomcat1
-
+      networks:
+        - front
 
