@@ -4,8 +4,6 @@ services:
       build:
         context: .
       image: tomcat:8.5
-      networks:
-        - tomcats
       environment:
         - PASSWORD=123456
       #volumes:
@@ -16,5 +14,5 @@ services:
         - tomcats
 networks:
   tomcats:
-    external: true
+    external: false
     name: tomcats
