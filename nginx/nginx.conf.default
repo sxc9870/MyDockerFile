@@ -48,7 +48,7 @@ http
     server {
         listen       80;
         server_name  localhost;  #映射域名
-        if($host !='localhost'){
+        if( $host != 'localhost' ){
             rewrite ^/(.*)$ http://www.baidu.com/$1 permanent;
         }
         #charset koi8-r;
