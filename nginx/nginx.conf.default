@@ -1,4 +1,4 @@
-user www www; #使用什么用户启动
+#user www www; #使用什么用户启动
 worker_processes 4;  #启动进程数   1或8个 跟CPU核心数有关
 worker_cpu_affinity 00000001 00000010 00000100 00001000; ##每个上述进程绑定到CPU上地址
 #pid /usr/local/nginx/logs/nginx.pid #主进程
