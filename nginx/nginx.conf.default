@@ -1,118 +1,75 @@
+user www www; #使用什么用户启动
+worker_processes 4;  #启动进程数   1或8个 跟CPU核心数有关
+worker_cpu_affinity 00000001 00000010 00000100 00001000; ##每个上述进程绑定到CPU上地址
+#pid /usr/local/nginx/logs/nginx.pid #主进程
+worker_rlimit_nofile 102400;    #一个进程打开最大文件数与NGINX并发链接数据
 
-#user  nobody;
-worker_processes 4;  #进程数
-
-error_log  /data/nginx/logs/error.log;
-error_log  /data/nginx/logs/error.log  notice;
-error_log  /data/nginx/logs/error.log  info;
-
-#pid        logs/nginx.pid;
-
-
-events {
-    worker_connections  1024;
+events
+{
+  use epoll; #多路复用  linux内核要2.6以上
+  worker_connections 102400; #一个work处理多少个并发
 }
 
+http
+{
+  include       mime.types;     #处理的请求格式  /text/html  同目录下的 mine.type文件
+  default_type  application/octet-stream;   #定义传输数据
+  #fastcgi_intercept_errors on;    #接收fastcgi输出的http1.0
+  charset utf-8;
+  server_names_hash_bucket_size 128; #保存服务器名称的hash表
+  client_header_buffer_size 4k;    #缓存使用的请求头大小
+  large_client_header_buffers 4 32k;    #上面无法满足则会用这个 如果没配置的话 超过上面的话会报错
+  client_max_body_size 300m;     #从客户端上传文件的大小
+  sendfile on;                     #nginx是否调用这个函数来输出文件 普通文件必须设置为ON
+  tcp_nopush on;             #防止网络阻塞
+  keepalive_timeout 60;      #超时时间 重要
+  tcp_nodelay on;        # 提供返回速度
+  client_body_buffer_size 512k;  #缓存请求
 
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
+  proxy_connect_timeout   5;    # nginx与tomcat链接超时
+  proxy_read_timeout      60;    #后端响应时间
+  proxy_send_timeout      5;     #后端服务器回传的时间
+  proxy_buffer_size       16k;    #网页缓存大小
+  proxy_buffers           4 64k;  #
+  proxy_busy_buffers_size 128k;   #繁忙时缓存大小
+  proxy_temp_file_write_size 128k;   #缓存文件夹的大小
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                       '$status $body_bytes_sent "$http_referer" '
-                       '"$http_user_agent" "$http_x_forwarded_for"';
+  gzip on;          #压缩
+  gzip_min_length  1k;
+  gzip_buffers     4 16k;
+  gzip_http_version 1.1;
+  gzip_comp_level 2;
+  gzip_types       text/plain application/x-javascript text/css application/xml;
+  gzip_vary on;
 
-    access_log  /data/nginx/logs/access.log  main;
-
-    sendfile        on;
-    #tcp_nopush     on;
-
-    #keepalive_timeout  0;
-    keepalive_timeout  65;
-
-    #gzip  on;
-
+  log_format  main '$remote_addr - $remote_user [$time_local] "$request" '
+                   '$status $body_bytes_sent "$http_referer" '
+	        	   '"$http_user_agent" $request_time';
     server {
         listen       80;
-        server_name  localhost;
+        server_name  localhost;  #映射域名
 
         #charset koi8-r;
 
-        access_log  /data/nginx/logs/host.access.log  main;
-
+        access_log  /data/nginx/logs/access.log  main;
+        error_log   /data/nginx/logs/error.log  crit;
         location / {
             root   /data/nginx/static;
             index  index.html index.htm;
+            proxy_next_upstream http_502 http_504 error timeout invalid_header;
+            proxy_set_header Host  $host; #封装头参数
+            proxy_set_header X-Real-IP $remote_addr;  #封装客户端IP
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  #
             proxy_pass http://web1;  ##转发到upstream的web1上
         }
 
-        #error_page  404              /404.html;
-
-        # redirect server error pages to the static page /50x.html
-        #
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-
-        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-        #
-        #location ~ \.php$ {
-        #    proxy_pass   http://127.0.0.1;
-        #}
-
-        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-        #
-        #location ~ \.php$ {
-        #    root           html;
-        #    fastcgi_pass   127.0.0.1:9000;
-        #    fastcgi_index  index.php;
-        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-        #    include        fastcgi_params;
-        #}
-
-        # deny access to .htaccess files, if Apache's document root
-        # concurs with nginx's one
-        #
-        #location ~ /\.ht {
-        #    deny  all;
-        #}
-    }
+        location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css)$
+        {
+                    root /data/nginx/static;
+                expires    30d;
+         }
 
 
-    # another virtual host using mix of IP-, name-, and port-based configuration
-    #
-    #server {
-    #    listen       8000;
-    #    listen       somename:8080;
-    #    server_name  somename  alias  another.alias;
 
-    #    location / {
-    #        root   html;
-    #        index  index.html index.htm;
-    #    }
-    #}
-
-
-    # HTTPS server
-    #
-    #server {
-    #    listen       443 ssl;
-    #    server_name  localhost;
-
-    #    ssl_certificate      cert.pem;
-    #    ssl_certificate_key  cert.key;
-
-    #    ssl_session_cache    shared:SSL:1m;
-    #    ssl_session_timeout  5m;
-
-    #    ssl_ciphers  HIGH:!aNULL:!MD5;
-    #    ssl_prefer_server_ciphers  on;
-
-    #    location / {
-    #        root   html;
-    #        index  index.html index.htm;
-    #    }
-    #}
          include web1.conf;
 }
