@@ -10,5 +10,5 @@ COPY static /data/nginx/static
 
 
 
-HEALTHCHECK --interval=5s --timeout=2s --retries=12 CMD curl --fail http://localhost:80/ || echo 111
-
+copy check_nginx.sh /opt/check_nginx.sh
+HEALTHCHECK --interval=5s --timeout=2s --retries=12 CMD   sh /opt/check_nginx.sh
