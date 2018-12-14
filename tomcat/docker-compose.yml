@@ -1,6 +1,7 @@
 version: '3.5'
 services:
   tomcat1:
+      restart: on-failure
       build:
         context: .
       image: tomcat:8.5
