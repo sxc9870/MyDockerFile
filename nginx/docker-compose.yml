@@ -13,6 +13,7 @@ services:
         - $PWD/web1.conf /etc/nginx/web1.conf
       ports:
         - "80:80"
+      privileged: true
       networks:
         - tomcats
       tty: true
