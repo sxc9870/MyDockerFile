@@ -18,19 +18,7 @@ services:
       - -c
       - |
          catalina.sh run
-  tomcat2:
-    build:
-      context: .
-    image: tomcat:8.5
-    environment:
-      - PASSWORD=123456
-      - TZ=Asia/Shanghai
-      #volumes:
-      # - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
-    tty: true
-    container_name: tomcat2
-    networks:
-      - tomcats
+
 networks:
   tomcats:
     external: false
