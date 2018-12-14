@@ -14,11 +14,9 @@ services:
       container_name: tomcat1
       networks:
         - tomcats
-      command:
-      - /bin/sh
-      - -c
-      - |
-         catalina.sh run
+      command: catalina.sh run && /bin/sh
+
+
 
 networks:
   tomcats:
