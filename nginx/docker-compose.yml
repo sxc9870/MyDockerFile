@@ -10,7 +10,7 @@ services:
       volumes:
         - $PWD/data/nginx/logs:/data/nginx/logs
         - $PWD/static:/data/nginx/static
-        - $PWD web1.conf /etc/nginx/web1.conf
+        - $PWD/web1.conf /etc/nginx/web1.conf
       ports:
         - "80:80"
       networks:
