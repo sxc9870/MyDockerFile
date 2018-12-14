@@ -14,10 +14,8 @@ services:
         - tomcats
       tty: true
       container_name: keppalived
-      command:
-        - /bin/sh
-        - -c
-        - |
+      command:  /bin/sh
+
 
       #links:
       #  - tomcat1:t1
