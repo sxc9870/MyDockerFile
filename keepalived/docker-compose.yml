@@ -9,8 +9,7 @@ services:
         - TZ=Asia/Shanghai
       volumes:
         - $PWD/data/keppalived/logs:/data/nginx/logs
-      ports:
-        - "80:80"
+
       networks:
         - tomcats
       tty: true
