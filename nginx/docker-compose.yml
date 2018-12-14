@@ -11,7 +11,9 @@ services:
       volumes:
         - $PWD/data/nginx/logs:/data/nginx/logs
         - $PWD/static:/data/nginx/static
-        - $PWD/web1.conf:/etc/nginx/web1.conf
+        - $PWD/conf/web1.conf:/etc/nginx/web1.conf
+        - $PWD/conf/nginx.conf.default:/etc/nginx/nginx.conf
+        - $PWD/conf/vhost.conf:/etc/nginx/vhost.conf
       ports:
         - "80:80"
       privileged: true
