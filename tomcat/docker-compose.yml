@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   tomcat1:
-      restart: on-failure
+      restart: on-failure:3
       build:
         context: .
       image: tomcat:8.5
@@ -14,10 +14,6 @@ services:
       container_name: tomcat1
       networks:
         - tomcats
-      command:  /bin/sh
-
-
-
 networks:
   tomcats:
     external: false
