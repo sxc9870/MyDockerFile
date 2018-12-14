@@ -12,4 +12,4 @@ copy keepalived-master.conf /etc/keepalived/keepalived-slave.conf
 RUN cd /etc/apk \
 && sed 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.aliyun.com/g' -i /etc/apk/repositories \
 && apk update \
-&& apk  --no-cache add add keepalived curl iproute2
+&& apk  --no-cache add  keepalived curl iproute2
