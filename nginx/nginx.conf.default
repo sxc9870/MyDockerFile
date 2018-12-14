@@ -52,12 +52,12 @@ http
         #    rewrite ^/(.*)$ http://www.baidu.com/$1 permanent;
         #}
         #charset koi8-r;
-
+        #root   /data/nginx/static;
+         #   index  index.html index.htm;
         access_log  /data/nginx/logs/access.log  main;
         error_log   /data/nginx/logs/error.log  crit;
         location / {
-            root   /data/nginx/static;
-            index  index.html index.htm;
+
             proxy_next_upstream http_502 http_504 error timeout invalid_header;
             proxy_set_header Host  $host; #封装头参数
             proxy_set_header X-Real-IP $remote_addr;  #封装客户端IP
