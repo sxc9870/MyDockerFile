@@ -1,0 +1,30 @@
+version: '3.5'
+services:
+  nginx:
+      build:
+        context: .
+      image: keepalived:master
+      environment:
+        - PASSWORD=123456
+        - TZ=Asia/Shanghai
+      volumes:
+        - $PWD/data/keppalived/logs:/data/nginx/logs
+      ports:
+        - "80:80"
+      networks:
+        - tomcats
+      tty: true
+      container_name: keppalived
+      command:
+        - /bin/sh
+        - -c
+        - |
+
+      #links:
+      #  - tomcat1:t1
+      #depends_on:
+      #  - tomcat1
+
+networks:
+  tomcats:
+    external: true
