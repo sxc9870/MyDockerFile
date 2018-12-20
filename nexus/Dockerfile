@@ -1,10 +1,6 @@
 FROM sonatype/nexus3:latest
 
 MAINTAINER  sxc 35631371@qq.com
-
-#COPY redis.conf /usr/local/tomcat
-
-
-copy check_tomcat.sh /opt/check_tomcat.sh
-HEALTHCHECK --interval=5s --timeout=2s --retries=12 CMD   sh /opt/check_tomcat.sh
+copy check_nexus.sh /opt/check_nexus.sh
+HEALTHCHECK --interval=5s --timeout=2s --retries=12 CMD   sh /opt/check_nexus.sh
 #CMD ["catalina.sh", "run"]
