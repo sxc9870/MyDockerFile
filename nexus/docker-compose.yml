@@ -9,7 +9,7 @@ services:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
       volumes:
-        - $PWD/data/nexus/:/nexus-data/config
+        - $PWD/data/nexus/:/nexus-data
       tty: true
       privileged: true
       ports:
