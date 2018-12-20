@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  nexus:
+      restart: always
+      build:
+        context: .
+      image: nexus3:my
+      environment:
+        - PASSWORD=123456
+        - TZ=Asia/Shanghai
+      volumes:
+        - $PWD/data/nexus/:/nexus-data
+      tty: true
+      ports:
+        - "8081:8081"
+      container_name: nexus
+#      networks:
+#        - tomcats
+#networks:
+#  tomcats:
+#    external: false
+#    name: tomcats
