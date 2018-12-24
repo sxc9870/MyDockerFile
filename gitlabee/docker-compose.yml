@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  gitlab-ee:
+      build:
+        context: .
+        image: gitlab:ee
+      environment:
+        - PASSWORD=123456
+        - TZ=Asia/Shanghai
+      hostname:
+        - gitlab.sxc.com
+      volumes:
+        - $PWD/data/gitlab/config:/etc/gitlab
+         - $PWD/data/gitlab/logs:/var/log/gitlab
+         - $PWD/data/gitlab/data:/var/opt/gitlab
+      ports:
+        - "5443:443"
+        - "580:80"
+        - "522:22"
+      tty: true
+      container_name: gitlab
+
