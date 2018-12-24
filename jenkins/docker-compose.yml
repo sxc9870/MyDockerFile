@@ -7,15 +7,12 @@ services:
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
-      configs:
-        -  uid: '1000'
-        -  gid: '1000'
-        -  mode: 0440
       volumes:
         - $PWD/data/jenkins/home:/var/jenkins_home
       ports:
-        - "8082:8080"
-        - "50000:50000"
+        - "18080:8080"
+        - "150000:50000"
       tty: true
       container_name: jenkins
 
+#要先运行 sudo chown 1000 data/jenkins/home/
