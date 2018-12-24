@@ -3,10 +3,14 @@ services:
   jenkins:
       build:
         context: .
-        image: jenkins:master
+      image: jenkins:master
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
+      configs:
+        -  uid: '1000'
+        -  gid: '1000'
+        -  mode: 0440
       volumes:
         - $PWD/data/jenkins/home:/var/jenkins_home
       ports:
