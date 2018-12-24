@@ -11,7 +11,7 @@ services:
         - $PWD/data/jenkins/home:/var/jenkins_home
       ports:
         - "18080:8080"
-        - "150000:50000"
+        - "15000:50000"
       tty: true
       container_name: jenkins
 
