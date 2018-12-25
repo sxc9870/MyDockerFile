@@ -7,9 +7,9 @@ services:
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://gitlab.example.com:580'  #tomcat的端口
-        gitlab_rails['gitlab_shell_ssh_port'] = 522   #ssh的端口
+          GITLAB_OMNIBUS_CONFIG: |
+            external_url 'https://gitlab.example.com:580'  #tomcat的端口
+            gitlab_rails['gitlab_shell_ssh_port'] = 522   #ssh的端口
       hostname: "gitlab.sxc.com"
 
       volumes:
