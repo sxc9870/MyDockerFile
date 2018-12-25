@@ -3,14 +3,17 @@ services:
   gitlab-ee:
       build:
         context: .
-        image: gitlab:ee
+      image: gitlab:ee
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
-      hostname:
-        - gitlab.sxc.com
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.example.com:580'  #tomcat的端口
+        gitlab_rails['gitlab_shell_ssh_port'] = 522   #ssh的端口
+      hostname: "gitlab.sxc.com"
+
       volumes:
-        - $PWD/data/gitlab/config:/etc/gitlab
+         - $PWD/data/gitlab/config:/etc/gitlab
          - $PWD/data/gitlab/logs:/var/log/gitlab
          - $PWD/data/gitlab/data:/var/opt/gitlab
       ports:
@@ -18,5 +21,5 @@ services:
         - "580:80"
         - "522:22"
       tty: true
-      container_name: gitlab
+      container_name: gitlab-ee
 
