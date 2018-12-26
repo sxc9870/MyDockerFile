@@ -14,7 +14,7 @@ services:
       container_name: tomcat1
       networks:
         tomcats:
-              ipv4_address: 172.101.0.2
+              ipv4_address: 172.102.0.2
               aliases:
                 - tomcats1
 networks:
