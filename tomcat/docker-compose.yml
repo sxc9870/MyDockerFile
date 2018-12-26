@@ -12,12 +12,15 @@ services:
         - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
       tty: true
       container_name: tomcat1
-#      networks:
-#        tomcats:
-#              ipv4_address: 172.101.0.7
-#              aliases:
-#                - master6
+      networks:
+        tomcats:
+              ipv4_address: 172.101.0.2
+              aliases:
+                - tomcats1
 networks:
   tomcats:
     external: false
     name: tomcats
+    ipam:
+      config:
+        - subnet: 172.102.0.0/24
