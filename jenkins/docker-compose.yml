@@ -14,5 +14,10 @@ services:
         - "15000:50000"
       tty: true
       container_name: jenkins
-
+      networks:
+        - tomcats
+networks:
+  tomcats:
+    external: false
+    name: tomcats
 #要先运行 sudo chown 1000 data/jenkins/home/
