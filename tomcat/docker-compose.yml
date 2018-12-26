@@ -8,12 +8,15 @@ services:
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
-        #volumes:
-       # - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
+       volumes:
+        - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
       tty: true
       container_name: tomcat1
-      networks:
-        - tomcats
+#      networks:
+#        tomcats:
+#              ipv4_address: 172.101.0.7
+#              aliases:
+#                - master6
 networks:
   tomcats:
     external: false
