@@ -9,7 +9,9 @@ services:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
       volumes:
-        - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
+        #- $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
+        - $PWD/data/tomcat1/conf:/usr/local/tomcat/conf
+        - $PWD/data/tomcat1/logs:/usr/local/tomcat/logs
       tty: true
       container_name: tomcat1
       networks:
