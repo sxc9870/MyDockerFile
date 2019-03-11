@@ -1,0 +1,8 @@
+version: '3.5'
+networks:
+  tomcats:
+    external: false
+    name: tomcats
+    ipam:
+      config:
+        - subnet: 172.102.0.0/24
