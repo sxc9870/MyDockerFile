@@ -3,7 +3,7 @@ services:
   centeros:
       build:
         context: .
-      image: centos:my
+      image: centos:jdk
       tty: true
-      container_name: centos-my
+      container_name: centos-jdk
 
