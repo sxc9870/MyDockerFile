@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+  centeros:
+      build:
+        context: .
+      image: centos:my
+      tty: true
+      container_name: centos-my
+
