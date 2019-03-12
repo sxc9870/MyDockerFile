@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  hadoop:
+      build:
+        context: .
+      image: hadoop:my
+      volumes:
+        - $PWD/data/hadoop/logs:/data/hadoop/logs
+      tty: true
+      ports:
+        - "6378:6379"
+      container_name: hadoop
+      command:  /bin/sh

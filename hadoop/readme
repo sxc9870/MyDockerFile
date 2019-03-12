@@ -1,0 +1,64 @@
+1.修改根目录下/etc/hadoop下的hadoop-env.sh 修改里面的java_home
+2.修改core-site.xml
+
+  <configuration>
+ <property>
+     <name>fs.defaultFS</name>
+     <value>hdfs://172.21.0.2:9000</value> <!--nameNode地址-->
+  </property>
+
+  <property>
+     <name>hadoop.tmp.dir</name>    <!--临时文件路径-->
+     <value>/home/hadoop/temp</value>
+  </property>
+</configuration>
+
+3.配置hdfs-site.xml
+  <configuration>
+
+<property>
+        <name>dfs.replication</name><value>1</value>  <!--设置副本数-->
+
+</property>
+</configuration>
+
+4.配置mapred-side.xml
+
+<configuration>
+<property>
+          <name>mapreduce.framework.name</name>
+          <value>yarn</value>
+</property>
+
+</configuration>
+
+5.配置 yarn-side.xml
+
+<configuration>
+
+<!-- Site specific YARN configuration properties -->
+
+<property>
+     <name>yarn.resourcemanager.hostname</name>             <!--resourceManager 的地址-->
+     <value>172.21.0.2</value>
+</property>
+           <property>
+    <name>yarn.nodemanager.aux-services</name><value>mapreduce_shffle</value>
+
+   </property>
+
+
+</configuration>
+
+6.配置haddophome
+
+
+配置   export HADOOP_HOME=/home/hadoop-3.1.2
+
+7. bin目录下 ./hdfs namenode -format
+
+8. 安装并开启SSH服务,给秘钥,用于远程访问(yarn-side.xml 貌似要用到这个吧)
+apt-get update
+apt-get install ssh-servicer 差不多这个意思
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
