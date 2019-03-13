@@ -12,7 +12,8 @@ copy config/etc $HADOOP_HOME/etc
 copy config/sbin $HADOOP_HOME/sbin
 
 RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak\
-&& echo >> /etc/resolv.conf nameserver 8.8.8.8
+&& echo >> /etc/resolv.conf nameserver 8.8.8.8\
+&& echo >> /etc/resolv.conf nameserver 114.114.114.114\
 && curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
 && yum makecache  && yum -y update\
 && yum install openssh-server -y\
