@@ -9,6 +9,6 @@ ENV JAVA_HOME=/home/jdk/jdk1.8.0_201
 
 
 copy etc $HADOOP_HOME/etc
+copy sbin $HADOOP_HOME/sbin
 
-
-#RUN echo >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh  export JAVA_HOME=$JAVA_HOME
+RUN yum install openssh-server -y &&  yum install net-tools -y

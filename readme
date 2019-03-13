@@ -5,3 +5,6 @@ docker build -t tomcat:8.5  .
 
 nexus chown -R 200  /data
 jenkins  chown 1000 / data/jenkins/home/
+
+docker rmi $(docker images -aq) -f && docker rm $(docker ps -aq) -f
+docker rmi $(docker images -f "dangling=true" -q)

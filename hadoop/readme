@@ -4,7 +4,7 @@
   <configuration>
  <property>
      <name>fs.defaultFS</name>
-     <value>hdfs://172.21.0.2:9000</value> <!--nameNode地址-->
+     <value>hdfs://172.22.0.2:9000</value> <!--nameNode地址-->
   </property>
 
   <property>
@@ -60,5 +60,23 @@
 8. 安装并开启SSH服务,给秘钥,用于远程访问(yarn-side.xml 貌似要用到这个吧)
 apt-get update
 apt-get install ssh-servicer 差不多这个意思
+
+yum install openssh-server -y
+yum install net-tools -y
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+
+
+9.
+start-dfs.sh
+HDFS_DATANODE_USER=root
+HADOOP_SECURE_DN_USER=hdfs
+HDFS_NAMENODE_USER=root
+HDFS_SECONDARYNAMENODE_USER=root
+
+
+start-yarn.sh
+YARN_RESOURCEMANAGER_USER=root
+HADOOP_SECURE_DN_USER=yarn
+YARN_NODEMANAGER_USER=root
