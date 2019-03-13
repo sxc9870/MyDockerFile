@@ -11,8 +11,8 @@ ENV HADOOP_HOME=/home/hadoop/hadoop-3.1.2
 copy config/etc $HADOOP_HOME/etc
 copy config/sbin $HADOOP_HOME/sbin
 
-RUN chmod 777 $HADOOP_HOME/sbin/start-dfs.sh  $HADOOP_HOME/sbin/start-yarn.sh
-
+RUN chmod 777 $HADOOP_HOME/sbin/start-dfs.sh  $HADOOP_HOME/sbin/start-yarn.sh\
+&& ./hdfs namenode -format
  #mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak\
 #&& echo >> /etc/resolv.conf nameserver 8.8.8.8\
 #&& echo >> /etc/resolv.conf nameserver 114.114.114.114\

@@ -49,14 +49,16 @@
 
 配置   export HADOOP_HOME=/home/hadoop-3.1.2
 
-7. bin目录下 ./hdfs namenode -format
+7. bin目录下
 
 8. 安装并开启SSH服务,给秘钥,用于远程访问(yarn-side.xml 貌似要用到这个吧)
 
+ docker-compose down --rmi all &&docker-compose up -d
+ docker exec -it hadoop /bin/bash
 
-yum install openssh-server -y
-yum install net-tools -y
 
+cd $HADOOP_HOME/bin
+./hdfs namenode -format
 
 /usr/sbin/sshd
 /usr/sbin/sshd-keygen -A
@@ -65,7 +67,10 @@ yum install net-tools -y
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
-ssh localhost
+
+cd $HADOOP_HOME/sbin/
+./start-all.sh
+jps
 
 9.
 start-dfs.sh
