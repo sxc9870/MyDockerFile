@@ -8,7 +8,7 @@ ENV HADOOP_HOME=/home/hadoop/hadoop-3.1.2
 
 
 
-copy etc $HADOOP_HOME/etc
-copy sbin $HADOOP_HOME/sbin
+copy config/etc $HADOOP_HOME/etc
+copy config/sbin $HADOOP_HOME/sbin
 
 RUN yum install openssh-server -y &&  yum install net-tools -y
