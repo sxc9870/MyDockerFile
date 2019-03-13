@@ -11,4 +11,8 @@ ENV HADOOP_HOME=/home/hadoop/hadoop-3.1.2
 copy config/etc $HADOOP_HOME/etc
 copy config/sbin $HADOOP_HOME/sbin
 
-RUN yum install openssh-server -y &&  yum install net-tools -y
+RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak\
+&& wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo\
+&& yum makecache  && yum -y update
+&& yum install openssh-server -y\
+&& yum install net-tools -y
