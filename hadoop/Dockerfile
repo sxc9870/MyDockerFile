@@ -11,4 +11,4 @@ copy mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml
 copy yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml
 
 
-RUN echo >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh  $JAVA_HOME
+RUN echo >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh  JAVA_HOME=$JAVA_HOME
