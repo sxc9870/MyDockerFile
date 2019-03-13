@@ -1,9 +1,9 @@
 version: '3.5'
 services:
-  centeros:
+  jdkbase:
       build:
         context: .
-      image: centos:jdk
+      image: jdk:base
       tty: true
-      container_name: centos-jdk
+      container_name: jdkbase
 
