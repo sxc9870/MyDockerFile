@@ -6,10 +6,7 @@ ENV JAVA_HOME=/home/jdk/jdk1.8.0_201
 
 
 add hadoop-3.1.2.tar.gz $HADOOP_HOME
-copy core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
-copy hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-copy mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml
-copy yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml
+copy hadoop $HADOOP_HOME
 
 
-RUN echo >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh  JAVA_HOME=$JAVA_HOME
+#RUN echo >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh  export JAVA_HOME=$JAVA_HOME
