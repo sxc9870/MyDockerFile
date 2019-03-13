@@ -56,10 +56,16 @@
 
 yum install openssh-server -y
 yum install net-tools -y
+
+
+/usr/sbin/sshd
+/usr/sbin/sshd-keygen -A
+/usr/sbin/sshd
+
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-修改ssh监听端口,巴拉巴拉的
 
+ssh localhost
 
 9.
 start-dfs.sh

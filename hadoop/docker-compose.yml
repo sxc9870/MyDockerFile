@@ -8,6 +8,6 @@ services:
         - $PWD/data/hadoop/logs:/data/hadoop/logs
       tty: true
       ports:
-        - "6378:6379"
+        - "8088:8088"
       container_name: hadoop
-      command:  /bin/sh
+      command:   /bin/bash
