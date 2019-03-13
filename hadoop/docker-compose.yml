@@ -10,4 +10,5 @@ services:
       ports:
         - "8088:8088"
       container_name: hadoop
-      command:   /bin/bash
+      privileged: true
+      command:   /usr/sbin/init
