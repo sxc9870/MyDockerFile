@@ -57,6 +57,9 @@
  docker exec -it hadoop /bin/bash
 
 
+9.
+start-dfs.sh
+
 cd $HADOOP_HOME/bin
 ./hdfs namenode -format
 
@@ -71,9 +74,6 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 cd $HADOOP_HOME/sbin/
 ./start-all.sh
 jps
-
-9.
-start-dfs.sh
 HDFS_DATANODE_USER=root
 HADOOP_SECURE_DN_USER=hdfs
 HDFS_NAMENODE_USER=root
@@ -84,3 +84,17 @@ start-yarn.sh
 YARN_RESOURCEMANAGER_USER=root
 HADOOP_SECURE_DN_USER=yarn
 YARN_NODEMANAGER_USER=root
+
+10. 外部宿主机无法下载文件和上传文件为0KB
+https://blog.csdn.net/hzylmf/article/details/47974661
+
+宿主机是没有桌面环境，只能通过实体机在浏览器中访问集群提供的web UI，但现在实体机无法ping通容器地址，也无法访问容器，原因在于，宿主机是实体机的子网，容器是宿主机的子网，而实体机不知道容器所在子网的存在，所以需要在实体机中添加一条从实体机到容器子网的路由。
+
+用管理员模式运行cmd，执行如下命令：
+
+
+route add -p 172.17.42.0 mask 255.255.255.0 192.168.92.129
+三个地址分别为：<目的子网地址> <掩码地址> <网关/宿主机地址>，之后，在实体机中可以正常ping通容器，web控制台也能正常打开了。
+
+可能是实体机上传文件,请求虚拟机地址的时候,跳转到了子网 172.17.XXX的请求.实体机无法访问导致无法上传或者下载问题
+route add 以后实体机能直接访问容器以后 可以跳转解决了该问题
