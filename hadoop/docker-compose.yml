@@ -13,6 +13,11 @@ services:
 #        - "50020:50020"
 #        - "9000:9000"
       container_name: hadoop
+      networks:
+        redis:
+          ipv4_address: 172.102.0.1
+          aliases:
+            - hadoop
       privileged: true
       command:   /usr/sbin/init
   hadoop2:
@@ -20,6 +25,11 @@ services:
       volumes:
         - $PWD/data/hadoop2/logs:/data/hadoop/logs
       tty: true
+      networks:
+        redis:
+          ipv4_address: 172.102.0.2
+          aliases:
+            - hadoop2
       container_name: hadoop2
       privileged: true
       command:   /usr/sbin/init
@@ -28,6 +38,17 @@ services:
         volumes:
           - $PWD/data/hadoop3/logs:/data/hadoop/logs
         tty: true
+        networks:
+          redis:
+            ipv4_address: 172.102.0.3
+            aliases:
+              - hadoop3
         container_name: hadoop3
         privileged: true
         command:   /usr/sbin/init
+
+networks:
+  hadoop:
+    ipam:
+      config:
+        - subnet: 172.102.0.0/16
