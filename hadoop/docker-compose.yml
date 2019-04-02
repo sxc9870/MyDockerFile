@@ -15,7 +15,7 @@ services:
       container_name: hadoop
       networks:
         hadoop:
-          ipv4_address: 172.102.0.1
+          ipv4_address: 172.102.0.2
           aliases:
             - hadoop
       privileged: true
@@ -27,7 +27,7 @@ services:
       tty: true
       networks:
         hadoop:
-          ipv4_address: 172.102.0.2
+          ipv4_address: 172.102.0.3
           aliases:
             - hadoop2
       container_name: hadoop2
@@ -40,7 +40,7 @@ services:
         tty: true
         networks:
           hadoop:
-            ipv4_address: 172.102.0.3
+            ipv4_address: 172.102.0.4
             aliases:
               - hadoop3
         container_name: hadoop3
