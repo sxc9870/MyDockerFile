@@ -14,7 +14,7 @@ services:
          - "9000:9000"
       container_name: hadoop
       networks:
-        redis:
+        hadoop:
           ipv4_address: 172.102.0.1
           aliases:
             - hadoop
@@ -26,7 +26,7 @@ services:
         - $PWD/data/hadoop2/logs:/data/hadoop/logs
       tty: true
       networks:
-        redis:
+        hadoop:
           ipv4_address: 172.102.0.2
           aliases:
             - hadoop2
@@ -39,7 +39,7 @@ services:
           - $PWD/data/hadoop3/logs:/data/hadoop/logs
         tty: true
         networks:
-          redis:
+          hadoop:
             ipv4_address: 172.102.0.3
             aliases:
               - hadoop3
