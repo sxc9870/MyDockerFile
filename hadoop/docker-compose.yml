@@ -14,10 +14,13 @@ services:
          - "9000:9000"
       container_name: hadoop
       networks:
-        hadoop:
-          ipv4_address: 172.102.0.2
-          aliases:
-            - hadoop
+          hadoop:
+            ipv4_address: 172.102.0.2
+            aliases:
+              - hadoop
+        # hostname: h1
+       # environment:
+       #     HADOOP_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 0.0.0.0 h1
       privileged: true
       command:   /usr/sbin/init
   hadoop2:

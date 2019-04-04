@@ -10,5 +10,7 @@ ENV HADOOP_HOME=/home/hadoop/hadoop-3.1.2
 
 copy config/etc $HADOOP_HOME/etc
 copy config/sbin $HADOOP_HOME/sbin
+COPY docker-entrypoint.sh /
 
 RUN chmod 777 $HADOOP_HOME/sbin/start-dfs.sh  $HADOOP_HOME/sbin/start-yarn.sh
+#ENTRYPOINT ["/docker-entrypoint.sh"]
