@@ -93,8 +93,28 @@ https://blog.csdn.net/hzylmf/article/details/47974661
 用管理员模式运行cmd，执行如下命令：
 
 
-route add -p 172.17.42.0 mask 255.255.255.0 192.168.92.129
+route add -p 172.102.0.0 mask 255.255.255.0 192.168.239.135
 三个地址分别为：<目的子网地址> <掩码地址> <网关/宿主机地址>，之后，在实体机中可以正常ping通容器，web控制台也能正常打开了。
 
 可能是实体机上传文件,请求虚拟机地址的时候,跳转到了子网 172.17.XXX的请求.实体机无法访问导致无法上传或者下载问题
 route add 以后实体机能直接访问容器以后 可以跳转解决了该问题
+
+
+11.集群 先用password 设置密码
+ scp ~/.ssh/id_rsa.pub  root@hadoop:~/.ssh/id_rsa.pub_hadoop 复制密码的公钥
+
+ scp ~/.ssh/id_rsa.pub  root@hadoop:~/.ssh/id_rsa.pub_from_hadoop2
+scp ~/.ssh/id_rsa.pub  root@hadoop2:~/.ssh/id_rsa.pub_from_hadoop2
+scp ~/.ssh/id_rsa.pub  root@hadoop3:~/.ssh/id_rsa.pub_from_hadoop2
+
+
+cat id_rsa.pub_from_hadoop3 >>authorized_keys
+cat id_rsa.pub_from_hadoop2 >>authorized_keys
+cat id_rsa.pub_from_hadoop >>authorized_keys
+
+ 主节点:namenode,recourceNode  修改master的 core-site  hdfs本机
+        修改slaves(2.x).works(3.x)
+
+ 从节点:datanode,nodemanager
+
+ 主节点 formatdata+  ./start-all 会根据works自动启动从节点的datanode

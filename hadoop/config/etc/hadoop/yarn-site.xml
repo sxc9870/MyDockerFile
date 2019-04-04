@@ -18,7 +18,7 @@
 
 <property>
      <name>yarn.resourcemanager.hostname</name>             <!--resourceManager 的地址-->
-     <value>0.0.0.0</value>
+     <value>hadoop</value>
 </property>
            <property>
     <name>yarn.nodemanager.aux-services</name>
