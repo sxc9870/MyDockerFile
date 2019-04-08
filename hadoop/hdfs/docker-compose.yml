@@ -5,7 +5,7 @@ services:
         context: .
       image: hadoop:my
       volumes:
-        - $PWD/data/hadoop/logs:/data/hadoop/logs
+        - $PWD/data/hadoop/logs:/home/hadoop/hadoop-3.1.2/logs
       tty: true
       ports:
          - "8088:8088"
@@ -26,7 +26,7 @@ services:
   hadoop2:
       image: hadoop:my
       volumes:
-        - $PWD/data/hadoop2/logs:/data/hadoop/logs
+          - $PWD/data/hadoop/logs:/home/hadoop/hadoop-3.1.2/logs
       tty: true
       networks:
         hadoop:
@@ -39,7 +39,7 @@ services:
   hadoop3:
         image: hadoop:my
         volumes:
-          - $PWD/data/hadoop3/logs:/data/hadoop/logs
+            - $PWD/data/hadoop/logs:/home/hadoop/hadoop-3.1.2/logs
         tty: true
         networks:
           hadoop:
