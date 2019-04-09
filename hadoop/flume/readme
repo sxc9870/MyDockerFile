@@ -16,3 +16,6 @@ echo export JAVA_HOME=$JAVA_HOME >>$FLUME_HOME/conf/flume-env.sh
 
 
 ./bin/flume-ng agent -n a1 -c conf -f conf/am.conf -Dflume.root.logger=INFO,console
+
+3.破玩意关闭以后进程会残留
+ps -ef|grep flume | grep -v grep | awk '{print $2}' | xargs kill -9
