@@ -10,7 +10,7 @@ services:
         - TZ=Asia/Shanghai
       volumes:
         - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
-        - $PWD/data/tomcat1/conf:/usr/local/tomcat/conf
+       # - $PWD/data/tomcat1/conf:/usr/local/tomcat/conf
         - $PWD/data/tomcat1/logs:/usr/local/tomcat/logs
       tty: true
       container_name: tomcat1
@@ -23,7 +23,7 @@ services:
         - TZ=Asia/Shanghai
       volumes:
         - $PWD/data/tomcat2/webapps:/usr/local/tomcat/webapps
-        - $PWD/data/tomcat2/conf:/usr/local/tomcat/conf
+        # $PWD/data/tomcat2/conf:/usr/local/tomcat/conf
         - $PWD/data/tomcat2/logs:/usr/local/tomcat/logs
       tty: true
       container_name: tomcat2
@@ -36,7 +36,7 @@ services:
         - TZ=Asia/Shanghai
       volumes:
         - $PWD/data/tomcat3/webapps:/usr/local/tomcat/webapps
-        - $PWD/data/tomcat3/conf:/usr/local/tomcat/conf
+        #- $PWD/data/tomcat3/conf:/usr/local/tomcat/conf
         - $PWD/data/tomcat3/logs:/usr/local/tomcat/logs
       tty: true
       container_name: tomcat3
