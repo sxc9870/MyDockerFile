@@ -15,7 +15,8 @@ services:
       tty: true
       container_name: jenkins
       networks:
-        - tomcats
+        - jenkins
 networks:
   tomcats:
-    external: true
+    external: false
+    name: jenkins

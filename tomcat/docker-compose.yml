@@ -16,7 +16,7 @@ services:
       container_name: tomcat1
       hostname: tomcat1
       networks:
-        - tomcats
+        - jenkins
   tomcat2:
       restart: on-failure:3
       image: tomcat:8.5
@@ -31,7 +31,7 @@ services:
       container_name: tomcat2
       hostname: tomcat2
       networks:
-        - tomcats
+        - jenkins
   tomcat3:
       restart: on-failure:3
       image: tomcat:8.5
@@ -46,7 +46,7 @@ services:
       container_name: tomcat3
       hostname: tomcat3
       networks:
-        - tomcats
+        - jenkins
 networks:
-  tomcats:
+  jenkins:
     external: true
