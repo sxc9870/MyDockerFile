@@ -1,0 +1,9 @@
+1.解压,设置home
+
+echo export SQOOP_HOME=/home/apache-flume-1.9.0-bin >> /root/.bashrc
+source /root/.bashrc
+
+cp $SQOOP_HOME/conf/sqoop-env.sh.template $SQOOP_HOME/conf/sqoop-env.sh
+
+
+2.
