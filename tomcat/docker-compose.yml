@@ -15,8 +15,8 @@ services:
       tty: true
       container_name: tomcat1
       hostname: tomcat1
-      external_links:
-        - jenkins:jk
+      networks:
+        - tomcats
   tomcat2:
       restart: on-failure:3
       image: tomcat:8.5
@@ -30,8 +30,8 @@ services:
       tty: true
       container_name: tomcat2
       hostname: tomcat2
-      external_links:
-        - jenkins:jk
+      networks:
+        - tomcats
   tomcat3:
       restart: on-failure:3
       image: tomcat:8.5
@@ -45,5 +45,8 @@ services:
       tty: true
       container_name: tomcat3
       hostname: tomcat3
-      external_links:
-        - jenkins:jk
+      networks:
+        - tomcats
+networks:
+  tomcats:
+    external: true
