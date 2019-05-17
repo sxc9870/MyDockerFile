@@ -5,3 +5,8 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#dock
 
 分词插件
 https://github.com/medcl/elasticsearch-analysis-ik/releases
+
+
+扩展词库
+配置文件config/IKAnalyzer.cfg.xml
+
