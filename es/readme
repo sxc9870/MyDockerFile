@@ -1,1 +1,7 @@
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-cluster-composefile
+
+
+
+
+分词插件
+https://github.com/medcl/elasticsearch-analysis-ik/releases
