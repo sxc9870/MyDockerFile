@@ -1,0 +1,7 @@
+version: '3.5'
+services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.0.1
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_HOSTS: http://elasticsearch.example.org
