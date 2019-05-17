@@ -57,7 +57,7 @@ services:
     ports:
       - 7200:9200
     volumes:
-      - /data/es2/:/usr/share/elasticsearch/data
+      - /data/es3/:/usr/share/elasticsearch/data
     networks:
       - esnet
 volumes:
