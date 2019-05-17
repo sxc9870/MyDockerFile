@@ -1,0 +1,10 @@
+cd /root/MyDockerFile/tomcat/
+docker-compose restart
+
+docker cp /root/jars/sbcloud-eureka.jar tomcat1:/home
+docker cp /root/jars/sbcloud-eureka.jar tomcat2:/home
+docker cp /root/jars/sbcloud-eureka.jar tomcat3:/home
+
+docker exec -i tomcat1  nohup java -jar /home/sbcloud-eureka.jar &
+docker exec -i tomcat2  nohup java -jar /home/sbcloud-eureka.jar &
+docker exec -i tomcat3  nohup java -jar /home/sbcloud-eureka.jar &

@@ -17,6 +17,6 @@ services:
       networks:
         - jenkins
 networks:
-  tomcats:
+  jenkins:
     external: false
     name: jenkins

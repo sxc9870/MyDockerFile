@@ -15,7 +15,7 @@ echo export JAVA_HOME=$JAVA_HOME >>$FLUME_HOME/conf/flume-env.sh
 2.cp config/flume-dev.sh.temp..    flume-dev.sh   修改里面的javahome为本机的javahome
 
 
-./bin/flume-ng agent -n a1 -c conf -f conf/am.conf -Dflume.root.logger=INFO,console
+./bin/flume-ng agent -n a1 -c conf -f conf/a.conf -Dflume.root.logger=INFO,console
 
 3.破玩意关闭以后进程会残留
 ps -ef|grep flume | grep -v grep | awk '{print $2}' | xargs kill -9

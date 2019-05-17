@@ -12,6 +12,8 @@ services:
         - $PWD/data/tomcat1/webapps:/usr/local/tomcat/webapps
        # - $PWD/data/tomcat1/conf:/usr/local/tomcat/conf
         - $PWD/data/tomcat1/logs:/usr/local/tomcat/logs
+      ports:
+        - "10000:10000"
       tty: true
       container_name: tomcat1
       hostname: tomcat1
@@ -23,6 +25,8 @@ services:
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
+      ports:
+        - "10001:10000"
       volumes:
         - $PWD/data/tomcat2/webapps:/usr/local/tomcat/webapps
         # $PWD/data/tomcat2/conf:/usr/local/tomcat/conf
@@ -38,6 +42,8 @@ services:
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
+      ports:
+        - "10002:10000"
       volumes:
         - $PWD/data/tomcat3/webapps:/usr/local/tomcat/webapps
         #- $PWD/data/tomcat3/conf:/usr/local/tomcat/conf
