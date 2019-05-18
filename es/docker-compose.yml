@@ -3,7 +3,7 @@ services:
   es01:
     build:
       context: .
-      image: es:my
+    image: es:my
     container_name: es01
     environment:
       - node.name=es01
@@ -25,7 +25,7 @@ services:
   es02:
     build:
       context: .
-      image: es:my
+    image: es:my
     container_name: es02
     environment:
       - node.name=es02
@@ -47,7 +47,7 @@ services:
   es03:
     build:
       context: .
-      image: es:my
+    image: es:my
     container_name: es03
     environment:
       - node.name=es03
