@@ -60,11 +60,7 @@ services:
       - /data/es3/:/usr/share/elasticsearch/data
     networks:
       - esnet
-volumes:
-  esdata01:
-    driver: local
-  esdata02:
-    driver: local
+
 
 networks:
   esnet:
