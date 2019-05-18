@@ -15,7 +15,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - $PWD/data/es1/:/usr/share/elasticsearch/data
+      - esdata01:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
@@ -37,7 +37,7 @@ services:
     ports:
       - 8200:9200
     volumes:
-      - $PWD/data/es2/:/usr/share/elasticsearch/data
+      - esdata02/:/usr/share/elasticsearch/data
     networks:
       - esnet
   es03:
@@ -57,10 +57,16 @@ services:
     ports:
       - 7200:9200
     volumes:
-      - $PWD/data/es3/:/usr/share/elasticsearch/data
+      - esdata03/:/usr/share/elasticsearch/data
     networks:
       - esnet
 
-
+volumes:
+  esdata01:
+    driver: sxc
+  esdata02:
+    driver: sxc
+  esdata03:
+    driver: sxc
 networks:
   esnet:
