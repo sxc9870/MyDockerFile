@@ -63,10 +63,10 @@ services:
 
 volumes:
   esdata01:
-    driver: sxc
+    driver: local
   esdata02:
-    driver: sxc
+    driver: local
   esdata03:
-    driver: sxc
+    driver: local
 networks:
   esnet:
