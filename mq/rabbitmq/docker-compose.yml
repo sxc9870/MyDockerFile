@@ -5,7 +5,13 @@ services:
     container_name: mq1
     #必须指定与节点名字和挂载卷有关
     hostname: mq1
+    environment:
+      - vm_memory_high_watermark=0.49
+      - RABBITMQ_ERLANG_COOKIE="secret cookie here"
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
     ports:
       - "15672:15672"
+      - "5672:5672"
     volumes:
       - $PWD/data/rabbitmq/mq1:/var/lib/rabbitmq/mnesia/rabbit@mq1
