@@ -3,3 +3,9 @@ services:
   mq1:
     image: rabbitmq:3.8-rc-management
     container_name: mq1
+    #必须指定与节点名字和挂载卷有关
+    hostname: mq1
+    ports:
+      - "5672:5672"
+    volumes:
+      - $PWD/data/rabbitmq/mq1:/var/lib/rabbitmq/mnesia/rabbit@mq1
