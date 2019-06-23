@@ -1,0 +1,5 @@
+version: '3.5'
+services:
+  mq1:
+    image: rabbitmq:3.8-rc-management
+    name: mq1
