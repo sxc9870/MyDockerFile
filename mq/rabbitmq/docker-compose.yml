@@ -34,6 +34,7 @@ services:
     volumes:
       - $PWD/data/rabbitmq/mq2:/var/lib/rabbitmq/mnesia/rabbit@mq2
     command:
+      - rabbitmq-server
       - rabbitmqctl stop_app
       - rabbitmqctl reset
       - rabbitmqctl join_cluster rabbit@mq1
@@ -56,6 +57,7 @@ services:
     volumes:
       - $PWD/data/rabbitmq/mq3:/var/lib/rabbitmq/mnesia/rabbit@mq3
     command:
+      - rabbitmq-server
       - rabbitmqctl stop_app
       - rabbitmqctl reset
       - rabbitmqctl join_cluster rabbit@mq1

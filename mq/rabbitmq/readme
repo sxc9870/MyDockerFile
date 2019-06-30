@@ -1,0 +1,3 @@
+1. rabbitmqctl add_user root root
+2.rabbitmqctl set_permissions -p / root ".*" ".*" ".*"
+3.rabbitmqctl set_user_tags root administrator
