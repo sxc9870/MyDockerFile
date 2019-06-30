@@ -15,3 +15,33 @@ services:
       - "5672:5672"
     volumes:
       - $PWD/data/rabbitmq/mq1:/var/lib/rabbitmq/mnesia/rabbit@mq1
+  mq2:
+    image: rabbitmq:3.8-rc-management
+    container_name: mq2
+    #必须指定与节点名字和挂载卷有关
+    hostname: mq2
+    environment:
+      - vm_memory_high_watermark=0.49
+      - RABBITMQ_ERLANG_COOKIE="secret cookie here"
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "15673:15672"
+      - "5673:5672"
+    volumes:
+      - $PWD/data/rabbitmq/mq2:/var/lib/rabbitmq/mnesia/rabbit@mq2
+  mq3:
+    image: rabbitmq:3.8-rc-management
+    container_name: mq3
+    #必须指定与节点名字和挂载卷有关
+    hostname: mq3
+    environment:
+      - vm_memory_high_watermark=0.49
+      - RABBITMQ_ERLANG_COOKIE="secret cookie here"
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "15674:15672"
+      - "5674:5672"
+    volumes:
+      - $PWD/data/rabbitmq/mq3:/var/lib/rabbitmq/mnesia/rabbit@mq3
