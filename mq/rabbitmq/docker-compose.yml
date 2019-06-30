@@ -34,11 +34,14 @@ services:
     volumes:
       - $PWD/data/rabbitmq/mq2:/var/lib/rabbitmq/mnesia/rabbit@mq2
     command:
-      - rabbitmq-server
-      - rabbitmqctl stop_app
-      - rabbitmqctl reset
-      - rabbitmqctl join_cluster rabbit@mq1
-      - rabbitmqctl start_app
+      - /bin/sh
+      - -c
+      - |
+         rabbitmq-server
+         rabbitmqctl stop_app
+         rabbitmqctl reset
+         rabbitmqctl join_cluster rabbit@mq1
+         rabbitmqctl start_app
   mq3:
     image: rabbitmq:3.8-rc-management
     container_name: mq3
@@ -57,8 +60,11 @@ services:
     volumes:
       - $PWD/data/rabbitmq/mq3:/var/lib/rabbitmq/mnesia/rabbit@mq3
     command:
-      - rabbitmq-server
-      - rabbitmqctl stop_app
-      - rabbitmqctl reset
-      - rabbitmqctl join_cluster rabbit@mq1
-      - rabbitmqctl start_app
+      - /bin/sh
+      - -c
+      - |
+         rabbitmq-server
+         rabbitmqctl stop_app
+         rabbitmqctl reset
+         rabbitmqctl join_cluster rabbit@mq1
+         rabbitmqctl start_app
