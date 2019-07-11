@@ -1,5 +1,16 @@
 version: '3.5'
 services:
+  consul:
+      image: consul
+      environment:
+        - TZ=Asia/Shanghai
+      ports:
+        - "8500:8500"
+      tty: true
+      container_name: consul
+      hostname: consul
+      networks:
+        - cloud  
   gate:
       image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
       environment:
