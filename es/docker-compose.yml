@@ -67,12 +67,5 @@ services:
     networks:
       - esnet
 
-#volumes:
-  #esdata01:
-  #  driver: local
-  #esdata02:
-  #  driver: local
-  #esdata03:
-  #  driver: local
 networks:
   esnet:

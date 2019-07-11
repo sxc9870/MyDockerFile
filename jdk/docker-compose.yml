@@ -1,0 +1,61 @@
+version: '3.5'
+services:
+  gate:
+      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      environment:
+        - TZ=Asia/Shanghai
+      ports:
+        - "8765:8765"
+      tty: true
+      container_name: gate
+      hostname: gate
+      networks:
+        - cloud
+  front:
+      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      environment:
+        - TZ=Asia/Shanghai
+      tty: true
+      container_name: front
+      hostname: front
+      networks:
+        - cloud
+  admin:
+      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      environment:
+        - TZ=Asia/Shanghai
+      tty: true
+      container_name: admin
+      hostname: admin
+      networks:
+        - cloud
+  organ:
+      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      environment:
+        - TZ=Asia/Shanghai
+      tty: true
+      container_name: organ
+      hostname: organ
+      networks:
+        - cloud
+  order:
+      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      environment:
+        - TZ=Asia/Shanghai
+      tty: true
+      container_name: order
+      hostname: order
+      networks:
+        - cloud
+  witness:
+      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      environment:
+        - TZ=Asia/Shanghai
+      tty: true
+      container_name: witness
+      hostname: witness
+      networks:
+        - cloud
+             
+networks:
+  cloud:
