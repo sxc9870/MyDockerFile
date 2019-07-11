@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   consul:
-      image: consul
+      image: consul:latest
       environment:
         - TZ=Asia/Shanghai
       ports:
