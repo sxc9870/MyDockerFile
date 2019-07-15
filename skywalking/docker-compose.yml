@@ -27,6 +27,8 @@ services:
   skywalking-ui:
     image: apache/skywalking-ui
     container_name: skywalking-ui
+    ports:
+      - 8090:8080
     environment:
       - SW_OAP_ADDRESS=oap:12800
 
