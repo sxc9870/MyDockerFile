@@ -1,10 +1,10 @@
 version: '3.5'
 services:
-  elasticsearch:
+  es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
-    container_name: elasticsearch
+    container_name: es01
     environment:
-      - node.name=elasticsearch
+      - node.name=es01
       - discovery.seed_hosts=es01
       - cluster.initial_master_nodes=es01
       - cluster.name=docker-cluster
@@ -15,7 +15,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      -  $PWD/data/elasticsearch/:/usr/share/elasticsearch/data
+      -  $PWD/data/es01/:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
   skywalking-oap:
@@ -23,7 +23,7 @@ services:
     container_name: skywalking-oap
     environment:
       - SW_STORAGE=elasticsearch
-      - SW_STORAGE_ES_CLUSTER_NODES=elasticsearch:9200
+      - SW_STORAGE_ES_CLUSTER_NODES=es01:9200
     depends_on:
       - elasticsearch
   skywalking-ui:
