@@ -14,3 +14,7 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 for server in $ZOO_SERVERS; do     循环环境变量 打到config文件里面去
         echo "$server" >> "$CONFIG"
     done
+
+    
+.env的文件在不显示引用的情况下 只能替换docker-compose 中的${},并不会写入容器的环境变量,
+如果使用了env_file标签,指定文件,则会导入环境变量  可以通过docker-compose config 来显示替换后的dc文件
