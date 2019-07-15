@@ -1,5 +1,23 @@
 version: '3.5'
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - discovery.seed_hosts=es01
+      - cluster.initial_master_nodes=es01
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      -  $PWD/data/elasticsearch/:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
   skywalking-oap:
     image: apache/skywalking-oap-server
     container_name: skywalking-oap
