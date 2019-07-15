@@ -4,10 +4,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
     container_name: es01
     environment:
-      - node.name=es01
-      - discovery.seed_hosts=es01
-      - cluster.initial_master_nodes=es01
-      - cluster.name=docker-cluster
+      - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -18,6 +15,7 @@ services:
       -  $PWD/data/es01/:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+      - 9300:9300 
   skywalking-oap:
     image: apache/skywalking-oap-server
     container_name: skywalking-oap
