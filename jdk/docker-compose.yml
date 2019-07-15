@@ -67,6 +67,10 @@ services:
       hostname: witness
       networks:
         - cloud
-             
+environment:
+  -REDIS_HOST:vm
+  -REDIS_PASSWORD:123456
 networks:
   cloud:
+extra_hosts:
+  - "vm:192.168.239.135"
