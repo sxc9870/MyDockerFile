@@ -6,6 +6,7 @@ services:
         args:
           cluster: "#"   #注解掉集群
       image: redis:master
+      container_name: redis_master
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
@@ -14,21 +15,26 @@ services:
       ports:
         - "6378:6379"
       tty: true
-      command: redis-server   /redis.conf   --masterauth ${PASSWORD} --requirepass  ${PASSWORD}
+      #redis_passowrd 在同目录的.env文件夹下面
+      command: redis-server   /redis.conf   --masterauth ${redis_password} --requirepass  ${redis_password}
   slave1:
       image: redis:master
       volumes:
          - $PWD/data/redis/slave1:/data/redis
+      container_name: redis_slave1
       environment:
         - PASSWORD=123456
         - TZ=Asia/Shanghai
+      ports:
+        - "6377:6379"  
       depends_on:
           - master
       links:
           - master
-      command: redis-server   /redis.conf  --slaveof master 6379 --masterauth ${PASSWORD} --requirepass ${PASSWORD}
+      command: redis-server   /redis.conf  --slaveof master 6379 --masterauth ${redis_password} --requirepass ${redis_password}
   slave2:
     image: redis:master
+    container_name: redis_slave2
     environment:
       - PASSWORD=123456
       - TZ=Asia/Shanghai
@@ -36,6 +42,8 @@ services:
       - $PWD/data/redis/slave2:/data/redis
     depends_on:
       - master
+    ports:
+        - "6376:6379"   
     links:
       - master
-    command: redis-server   /redis.conf  --slaveof master 6379 --masterauth ${PASSWORD} --requirepass ${PASSWORD}
+    command: redis-server   /redis.conf  --slaveof master 6379 --masterauth ${redis_password} --requirepass ${redis_password}
