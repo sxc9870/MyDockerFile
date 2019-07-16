@@ -20,6 +20,8 @@ services:
     restart: on-failure:3
     image: apache/skywalking-oap-server
     container_name: skywalking-oap
+    ports:
+      - 11800:11800
     environment:
       - SW_STORAGE=elasticsearch
       - SW_STORAGE_ES_CLUSTER_NODES=es01v6:9200
