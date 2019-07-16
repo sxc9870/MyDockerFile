@@ -10,3 +10,7 @@ https://github.com/medcl/elasticsearch-analysis-ik/releases
 扩展词库
 配置文件config/IKAnalyzer.cfg.xml
 
+挂载宿主机的虚拟卷要权限
+
+还要/etc/sysctl.conf   +   vm.max_map_count=262144
+还要sysctl -p
