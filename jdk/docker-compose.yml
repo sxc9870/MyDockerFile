@@ -12,7 +12,9 @@ services:
       networks:
         - cloud  
   gate:
-      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      build:
+        context: .
+      image: jdk:my
       env_file:
         - a.env
       environment:
@@ -27,7 +29,7 @@ services:
       networks:
         - cloud
   front:
-      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      image: jdk:my
       environment:
         - TZ=Asia/Shanghai
       tty: true
@@ -36,7 +38,7 @@ services:
       networks:
         - cloud
   admin:
-      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      image: jdk:my
       environment:
         - TZ=Asia/Shanghai
       tty: true
@@ -45,7 +47,7 @@ services:
       networks:
         - cloud
   organ:
-      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      image: jdk:my
       environment:
         - TZ=Asia/Shanghai
       tty: true
@@ -54,7 +56,7 @@ services:
       networks:
         - cloud
   order:
-      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      image: jdk:my
       environment:
         - TZ=Asia/Shanghai
       tty: true
@@ -63,7 +65,7 @@ services:
       networks:
         - cloud
   witness:
-      image: mcr.microsoft.com/java/jdk:8u192-zulu-alpine
+      image: jdk:my
       environment:
         - TZ=Asia/Shanghai
       tty: true
