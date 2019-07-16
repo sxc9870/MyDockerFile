@@ -18,7 +18,8 @@ services:
       env_file:
         - a.env
       environment:
-        - TZ=Asia/Shanghai
+        - SW_AGENT_NAME=gate
+        - SW_AGENT_COLLECTOR_BACKEND_SERVICES=mv:11800
       extra_hosts:
         - "vm:192.168.239.135"  
       ports:
