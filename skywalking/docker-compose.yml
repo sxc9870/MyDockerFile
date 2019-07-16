@@ -18,7 +18,7 @@ services:
       - 9300:9300 
   skyoap:
     restart: on-failure:3
-    image: apache/skywalking-server
+    image: apache/skywalking-oap-server
     container_name: skyoap
     ports:
       - 11800:11800
