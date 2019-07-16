@@ -17,6 +17,7 @@ services:
       - 9200:9200
       - 9300:9300 
   skywalking-oap:
+    restart: on-failure:3
     image: apache/skywalking-oap-server
     container_name: skywalking-oap
     environment:
