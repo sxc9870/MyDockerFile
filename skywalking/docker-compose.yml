@@ -16,10 +16,10 @@ services:
     ports:
       - 9200:9200
       - 9300:9300 
-  skywalking-oap:
+  skyoap:
     restart: on-failure:3
-    image: apache/skywalking-oap-server
-    container_name: skywalking-oap
+    image: apache/skywalking-server
+    container_name: skyoap
     ports:
       - 11800:11800
     environment:
@@ -27,15 +27,15 @@ services:
       - SW_STORAGE_ES_CLUSTER_NODES=es01v6:9200
     depends_on:
       - es01v6
-  skywalking-ui:
+  skyui:
     image: apache/skywalking-ui
-    container_name: skywalking-ui
+    container_name: skyui
     ports:
       - 8090:8080
     environment:
-      - SW_OAP_ADDRESS=skywalking-oap:12800
+      - SW_OAP_ADDRESS=skyoap:12800
     depends_on:
-      - skywalking-oap
+      - skyoap
 
 
  
