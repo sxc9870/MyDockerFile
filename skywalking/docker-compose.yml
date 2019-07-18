@@ -7,6 +7,7 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - TZ=Asia/Shanghai
     ulimits:
       memlock:
         soft: -1
@@ -23,6 +24,7 @@ services:
     ports:
       - 11800:11800
     environment:
+      - TZ=Asia/Shanghai
       - SW_STORAGE=elasticsearch
       - SW_STORAGE_ES_CLUSTER_NODES=es01v6:9200
     depends_on:
@@ -33,6 +35,7 @@ services:
     ports:
       - 8090:8080
     environment:
+      - TZ=Asia/Shanghai
       - SW_OAP_ADDRESS=skyoap:12800
     depends_on:
       - skyoap
