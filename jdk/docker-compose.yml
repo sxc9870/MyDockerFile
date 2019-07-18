@@ -77,7 +77,7 @@ services:
 networks:
   cloud:
   
-configs
+configs:
     cloud_config:
         extra_hosts:
                 - "vm:192.168.239.135"
