@@ -76,6 +76,7 @@ services:
         - cloud
 networks:
   cloud:
+  
 configs
     cloud_config:
         extra_hosts:
