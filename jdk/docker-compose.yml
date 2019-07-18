@@ -21,8 +21,6 @@ services:
       build:
         context: .
       image: jdk:my
-      configs:
-         - cloud_config
       environment:
         - SW_AGENT_NAME=gate
       ports:
