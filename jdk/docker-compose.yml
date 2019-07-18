@@ -26,6 +26,7 @@ services:
       hostname: gate
       networks:
         - cloud
+      *extra_hosts
   front:
       image: jdk:my
       container_name: front
@@ -77,6 +78,8 @@ services:
 networks:
   cloud:
 
-x-extra_hosts:
+x-common:
+    &extra_hosts
+     extra_hosts:
       - "vm:192.168.239.135"
       - "dev.hpzhan.com:10.253.97.197"  
