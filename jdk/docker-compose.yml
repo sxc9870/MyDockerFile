@@ -76,7 +76,7 @@ services:
         - cloud
 networks:
   cloud:
-  
-configs:
-    cloud_config:
-       file: ./myconfig.txt
+
+x-extra_hosts:
+      - "vm:192.168.239.135"
+      - "dev.hpzhan.com:10.253.97.197"  
