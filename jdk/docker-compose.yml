@@ -15,12 +15,10 @@ services:
       build:
         context: .
       image: jdk:my
-      env_file:
-        - a.env
+      configs:
+         - cloud_config
       environment:
-        - TZ=Asia/Shanghai
         - SW_AGENT_NAME=gate
-        - SW_AGENT_COLLECTOR_BACKEND_SERVICES=vm:11800
       ports:
         - "8765:8765"
       tty: true
@@ -34,9 +32,7 @@ services:
       hostname: front
       tty: true
       environment:
-        - TZ=Asia/Shanghai
         - SW_AGENT_NAME=front
-        - SW_AGENT_COLLECTOR_BACKEND_SERVICES=vm:11800
       extra_hosts:
         - "vm:192.168.239.135"
         - "dev.hpzhan.com:10.253.97.197" 
@@ -80,6 +76,8 @@ services:
         - cloud
 networks:
   cloud:
-extra_hosts:
-        - "vm:192.168.239.135"
-        - "dev.hpzhan.com:10.253.97.197"  
+configs
+    cloud_config:
+        extra_hosts:
+                - "vm:192.168.239.135"
+                - "dev.hpzhan.com:10.253.97.197"  
