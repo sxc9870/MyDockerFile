@@ -2,21 +2,21 @@ version: '3.5'
 x-common:
     &extra_hosts
       extra_hosts:
-      - "vm:192.168.239.135"
-      - "dev.hpzhan.com:10.253.97.197"
-
+        - "vm:192.168.239.135"
+        - "dev.hpzhan.com:10.253.97.197"
+      env_file:
+        -a.env
+      networks:
+        - cloud    
 services:
   consul:
       image: consul:latest
-      environment:
-        - TZ=Asia/Shanghai
       ports:
         - "8500:8500"
       tty: true
       container_name: consul
       hostname: consul
-      networks:
-        - cloud  
+      <<: *extra_hosts
   gate:
       build:
         context: .
@@ -28,9 +28,7 @@ services:
       tty: true
       container_name: gate
       hostname: gate
-      networks:
-        - cloud
-      <<: extra_hosts
+      <<: *extra_hosts
   front:
       image: jdk:my
       container_name: front
@@ -38,47 +36,39 @@ services:
       tty: true
       environment:
         - SW_AGENT_NAME=front
-      extra_hosts:
-        - "vm:192.168.239.135"
-        - "dev.hpzhan.com:10.253.97.197" 
-      networks:
-        - cloud
+      <<: *extra_hosts
   admin:
       image: jdk:my
       environment:
-        - TZ=Asia/Shanghai
+        - SW_AGENT_NAME=admin
       tty: true
       container_name: admin
       hostname: admin
-      networks:
-        - cloud
+      <<: *extra_hosts
   organ:
       image: jdk:my
       environment:
-        - TZ=Asia/Shanghai
+        - SW_AGENT_NAME=admin
       tty: true
       container_name: organ
       hostname: organ
-      networks:
-        - cloud
+      <<: *extra_hosts
   order:
       image: jdk:my
       environment:
-        - TZ=Asia/Shanghai
+        - SW_AGENT_NAME=order
       tty: true
       container_name: order
       hostname: order
-      networks:
-        - cloud
+      <<: *extra_hosts
   witness:
       image: jdk:my
       environment:
-        - TZ=Asia/Shanghai
+        - SW_AGENT_NAME=witness
       tty: true
       container_name: witness
       hostname: witness
-      networks:
-        - cloud
+      <<: *extra_hosts
 networks:
   cloud:
 
