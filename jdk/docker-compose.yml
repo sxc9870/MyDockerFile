@@ -21,7 +21,8 @@ services:
         - SW_AGENT_NAME=gate
         - SW_AGENT_COLLECTOR_BACKEND_SERVICES=vm:11800
       extra_hosts:
-        - "vm:192.168.239.135"  
+        - "vm:192.168.239.135"
+        - "dev.hpzhan.com:10.253.97.197"  
       ports:
         - "8765:8765"
       tty: true
@@ -36,6 +37,9 @@ services:
       tty: true
       container_name: front
       hostname: front
+      extra_hosts:
+        - "vm:192.168.239.135"
+        - "dev.hpzhan.com:10.253.97.197" 
       networks:
         - cloud
   admin:
